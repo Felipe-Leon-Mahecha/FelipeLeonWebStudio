@@ -174,8 +174,8 @@ barbería ya tiene el 60% hecho.
 | F2 | Servicios, precios, proceso, FAQ, contacto + WhatsApp | ✅ Completada |
 | F3 | Infraestructura demos (collections + Portafolio + 4 archivos + página /demos) | ✅ |
 | F3b | Construir los 4 micro-sitios demo (guía en cada `.md`) | ⏳ SIGUIENTE (otra IA) |
-| F4 | Tests + pulido + microanimaciones | ◐ Parcial (tests y pulido ✅, microanimaciones mayores tras rediseño Claude) |
-| F5 | SEO completo, analytics, Lighthouse 95+, dominio | ◐ Parcial (robots, og.png, JSON-LD, 404 hechos) |
+| F4 | Tests + pulido + microanimaciones | ✅ Completada (16/08: check 0, build OK, scroll progress + marquee + float hero) |
+| F5 | SEO completo, analytics, Lighthouse 95+, dominio | ◐ Parcial (robots, og.png, JSON-LD, 404, analytics GA4 configurable listos) |
 | F6 | Lanzamiento + adquisición de clientes | ⏳ |
 
 ## 11. COMANDOS ÚTILES
@@ -248,8 +248,21 @@ El servidor de desarrollo corre en http://localhost:4321
      Reveal.astro; `Astro.site` posible undefined en Layout (JSON-LD).
    - Pulido CSS global: feedback de presión en botones (`active:scale`), `scroll-margin-top`
      para anclas bajo el header fijo, y regla global `prefers-reduced-motion` (WCAG).
-   - **Microanimaciones mayores (scroll progress, marquee, contadores) las dejo PARA
-     DESPUÉS del rediseño de Claude** para no chocar con su propuesta visual.
+   - **Microanimaciones MAYORES hechas (16/08)**: barra de progreso de scroll en el
+     top (`src/scripts/scroll-progress.ts` + `#scroll-progress` en Layout), marquee de
+     industrias entre Hero y About (`src/components/Marquee.astro`, pausa en hover,
+     respeta reduced-motion), y `animate-float`/`animate-float-slow` en los glows del
+     hero. Se hicieron ya (aunque el rediseño de Claude los pueda reubicar/rediseñar).
+9. **Git + versionado ✅ (16/08):** repo inicializado (rama `main`), `.gitignore`
+   (node_modules, dist, .astro, .env...), primer commit de todo el trabajo
+   (`Portafolio completo: design system, secciones, demos, SEO y pulido`).
+10. **CLAUDE.md ✅ (16/08):** creado en la raíz con design system, reglas y comandos,
+    para que Claude (o cualquier IA) pueda rediseñar sin romper el proyecto.
+11. **F5 Analytics (preparado, sin activar) ✅ (16/08):** GA4 listo en `Layout.astro`,
+    solo se renderiza si `SITE.analyticsId` está lleno (hoy `''` → no carga nada).
+    Para activarlo: crear propiedad GA4 en analytics.google.com, copiar el ID
+    `G-XXXXXXX` en `src/lib/site.ts` (`analyticsId: 'G-XXXXXXX'`) y re-desplegar.
+    ⚠️ Falta: dominio real en `astro.config.mjs` (todavía `https://felipeleon.example.com`).
 
 ## 14. INSTRUCCIONES PARA LA IA QUE CONTINÚE
 

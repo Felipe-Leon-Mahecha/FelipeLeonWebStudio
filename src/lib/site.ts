@@ -9,6 +9,7 @@ export const SITE = {
   instagram: 'felieleonmm',
   location: 'Colombia',
   priceAnchor: 'desde $1.500.000 COP',
+  analyticsId: '',
   nav: [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Sobre mí', href: '#sobre-mi' },

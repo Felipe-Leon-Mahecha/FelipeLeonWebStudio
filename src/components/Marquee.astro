@@ -1,0 +1,51 @@
+---
+import Gem from './ui/Gem.astro';
+
+const items = [
+  'Barberías',
+  'Salones de belleza',
+  'Veterinarias',
+  'Restaurantes',
+  'Gimnasios',
+  'Tiendas de moda',
+  'Consultorios',
+  'Mercados',
+];
+---
+
+<section class="border-y border-line bg-paper-soft/50 py-5 dark:border-line-dark dark:bg-ink-soft/50">
+  <div class="marquee overflow-hidden">
+    <div class="marquee-track flex w-max items-center gap-10 pr-10">
+      {[0, 1].map(() =>
+        items.map((item) => (
+          <span class="flex shrink-0 items-center gap-10 font-mono text-sm tracking-[0.2em] uppercase text-ink/50 dark:text-paper/50">
+            {item}
+            <Gem width={12} height={12} class="h-3 w-3" />
+          </span>
+        )),
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>

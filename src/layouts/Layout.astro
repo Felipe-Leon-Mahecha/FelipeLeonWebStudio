@@ -54,6 +54,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       })();
     </script>
 
+    {
+      SITE.analyticsId && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analyticsId}`}
+          ></script>
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${SITE.analyticsId}');`}
+          ></script>
+        </>
+      )
+    }
+
     <script type="application/ld+json" is:inline set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@graph': [
@@ -78,6 +94,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   </head>
 
   <body>
+    <div
+      id="scroll-progress"
+      class="fixed top-0 left-0 z-[60] h-[3px] w-full origin-left bg-accent-500"
+      style="transform: scaleX(0)"
+      aria-hidden="true"
+    ></div>
+
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-brand-500 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink"
@@ -95,6 +118,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
     <script>
       import '../scripts/reveal';
+      import '../scripts/scroll-progress';
     </script>
   </body>
 </html>
