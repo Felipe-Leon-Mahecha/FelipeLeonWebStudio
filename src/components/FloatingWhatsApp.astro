@@ -1,0 +1,18 @@
+---
+import WhatsAppIcon from './ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../lib/site';
+---
+
+<a
+  href={whatsappLink('Hola Felipe, quiero una web premium para mi negocio.')}
+  target="_blank"
+  rel="noopener"
+  aria-label="Cotizar por WhatsApp"
+  class="fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-brand-500 text-ink shadow-[var(--shadow-glow-brand)] transition-transform duration-300 hover:scale-110 sm:right-6 sm:bottom-6"
+>
+  <span
+    class="absolute inset-0 rounded-full bg-brand-500 opacity-40 animate-pulse-soft"
+    aria-hidden="true"
+  ></span>
+  <WhatsAppIcon width={26} height={26} class="h-7 w-7" />
+</a>

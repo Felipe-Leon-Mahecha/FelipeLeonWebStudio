@@ -1,0 +1,100 @@
+---
+import Reveal from './ui/Reveal.astro';
+import { whatsappLink } from '../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const steps = [
+  {
+    title: 'Conversamos',
+    text: 'Por WhatsApp me cuentas tu negocio y qué necesitas. El mismo día recibes una propuesta con precio claro.',
+    icon: 'lucide:message-circle',
+  },
+  {
+    title: 'Diseño a medida',
+    text: 'Diseño y desarrollo tu web desde cero. Te muestro avances por WhatsApp hasta que quede perfecta.',
+    icon: 'lucide:pen-tool',
+  },
+  {
+    title: 'Revisas y apruebas',
+    text: 'Pruebas tu web en tu teléfono y en tu computador. Los ajustes que pidas están incluidos.',
+    icon: 'lucide:mouse-pointer-click',
+  },
+  {
+    title: 'Publicación y soporte',
+    text: 'Tu web queda en línea esta semana, conectada a tu WhatsApp. Incluye 30 días de acompañamiento.',
+    icon: 'lucide:rocket',
+  },
+];
+---
+
+<section id="proceso" class="py-24">
+  <div class="shell">
+    <Reveal class="max-w-2xl">
+      <p class="eyebrow">Proceso de trabajo</p>
+      <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-5xl">
+        Así de simple, sin sorpresas
+      </h2>
+      <p class="mt-5 leading-relaxed text-ink/65 dark:text-paper/65">
+        Saber exactamente qué va a pasar (y cuándo) es lo que hace que trabajar conmigo
+        sea tranquilo desde el primer día.
+      </p>
+    </Reveal>
+
+    <div class="relative mt-16">
+      <div
+        class="absolute top-0 hidden h-full w-px bg-gradient-to-b from-accent-500/60 via-line to-transparent sm:left-1/2 sm:block dark:via-line-dark"
+        aria-hidden="true"
+      ></div>
+
+      <div class="space-y-12 sm:space-y-16">
+        {
+          steps.map((s, i) => (
+            <Reveal class="relative sm:grid sm:grid-cols-2 sm:gap-14">
+              {
+                i % 2 === 0 ? (
+                  <div class="pl-16 sm:order-1 sm:pr-10 sm:pl-0">
+                    <span class="font-mono text-xs tracking-[0.25em] text-accent-500 uppercase">
+                      Paso 0{i + 1}
+                    </span>
+                    <h3 class="mt-2 font-display text-2xl font-bold">{s.title}</h3>
+                    <p class="mt-2 max-w-md leading-relaxed text-ink/60 dark:text-paper/60">
+                      {s.text}
+                    </p>
+                  </div>
+                ) : (
+                  <div class="pl-16 sm:order-2 sm:pl-10 sm:pr-0">
+                    <span class="font-mono text-xs tracking-[0.25em] text-accent-500 uppercase">
+                      Paso 0{i + 1}
+                    </span>
+                    <h3 class="mt-2 font-display text-2xl font-bold">{s.title}</h3>
+                    <p class="mt-2 max-w-md leading-relaxed text-ink/60 dark:text-paper/60">
+                      {s.text}
+                    </p>
+                  </div>
+                )
+              }
+
+              <div
+                class="absolute left-0 top-1 flex h-12 w-12 items-center justify-center rounded-full border border-accent-500/40 bg-paper shadow-[var(--shadow-card)] sm:left-1/2 sm:-translate-x-1/2 dark:bg-ink"
+                aria-hidden="true"
+              >
+                <Icon name={s.icon} width={20} height={20} class="h-5 w-5 text-accent-500" />
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+
+    <Reveal delay={100} class="mt-14 flex justify-center">
+      <a
+        href={whatsappLink('Hola Felipe, quiero empezar mi proyecto web contigo.')}
+        target="_blank"
+        rel="noopener"
+        class="font-mono text-sm text-accent-500 underline-offset-4 transition hover:text-accent-400 hover:underline"
+      >
+        Iniciar mi proyecto →
+      </a>
+    </Reveal>
+  </div>
+</section>

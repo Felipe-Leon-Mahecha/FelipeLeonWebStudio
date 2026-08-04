@@ -1,0 +1,97 @@
+---
+import Reveal from './ui/Reveal.astro';
+import { Icon } from 'astro-icon/components';
+
+const tech = ['Astro', 'JavaScript', 'HTML & CSS', 'SEO técnico', 'WhatsApp API', 'Node.js'];
+
+const values = [
+  {
+    icon: 'lucide:zap',
+    title: 'Velocidad',
+    text: 'Tu web lista en 5–7 días. Lo que las agencias tardan meses.',
+  },
+  {
+    icon: 'lucide:pen-tool',
+    title: 'Diseño a medida',
+    text: 'Cada color y cada texto pensado para tu marca. Cero plantillas.',
+  },
+  {
+    icon: 'lucide:message-circle',
+    title: 'Comunicación clara',
+    text: 'Te hablo en tu idioma, sin tecnicismos. Avances por WhatsApp.',
+  },
+  {
+    icon: 'lucide:shield-check',
+    title: 'Soporte real',
+    text: 'No desaparezco tras la entrega. Te acompaño los primeros 30 días.',
+  },
+];
+---
+
+<section id="sobre-mi" class="relative py-24">
+  <div class="shell grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+    <div>
+      <Reveal>
+        <p class="eyebrow">Sobre mí</p>
+        <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-5xl">
+          Un desarrollador que piensa como negocio
+        </h2>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <div class="mt-7 space-y-4 leading-relaxed text-ink/70 dark:text-paper/70">
+          <p>
+            Soy <strong class="font-semibold text-ink dark:text-paper">Felipe León</strong>,
+            desarrollador web. No construyo páginas para que "se vean bonitas": construyo webs
+            que trabajan por tu negocio. Con WhatsApp integrado para que el cliente te escriba en
+            un clic, con velocidad y con un diseño que da confianza desde el primer segundo.
+          </p>
+          <p>
+            Mi ventaja real es la velocidad. Uso procesos modernos y herramientas de IA para
+            entregar en días lo que otros tardan semanas — sin sacrificar calidad. Cada proyecto
+            se diseña a medida para tu marca.
+          </p>
+          <p>
+            Fuera del trabajo también desarrollo{' '}
+            <strong class="font-semibold text-ink dark:text-paper">THE GEM</strong>, mi propio
+            videojuego. Eso me obliga a estar al día con las tecnologías más nuevas, para que tu
+            web siempre se construya con lo mejor que existe.
+          </p>
+        </div>
+      </Reveal>
+
+      <Reveal delay={180}>
+        <div class="mt-8 flex flex-wrap gap-2">
+          {
+            tech.map((t) => (
+              <span
+                class="rounded-full border border-line-strong px-3.5 py-1.5 font-mono text-xs text-ink/60 dark:border-line-dark dark:text-paper/60"
+              >
+                {t}
+              </span>
+            ))
+          }
+        </div>
+      </Reveal>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        values.map((v, i) => (
+          <Reveal
+            delay={i * 100}
+            class="card group p-6 transition-transform duration-300 hover:-translate-y-1"
+          >
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-500/10 text-accent-500 transition-colors group-hover:bg-accent-500 group-hover:text-white"
+            >
+              <Icon name={v.icon} width={20} height={20} class="h-5 w-5" />
+            </div>
+            <h3 class="mt-4 font-display text-lg font-bold">{v.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink/60 dark:text-paper/60">{v.text}</p>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+---
+import Button from './ui/Button.astro';
+import Badge from './ui/Badge.astro';
+import Reveal from './ui/Reveal.astro';
+import WhatsAppIcon from './ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const stats = [
+  { value: '5–7', unit: 'días', label: 'entrega promedio de una web' },
+  { value: '0', unit: 'plantillas', label: 'cada diseño es único' },
+  { value: '24/7', unit: 'WhatsApp', label: 'tu cliente te escribe en un clic' },
+];
+---
+
+<section id="inicio" class="relative overflow-hidden">
+  <div
+    class="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_35%,black,transparent)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute top-[-12rem] left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent-500/20 blur-[130px]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute right-[-8rem] bottom-[-16rem] h-[28rem] w-[28rem] rounded-full bg-brand-500/10 blur-[120px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="shell relative flex min-h-[100svh] flex-col items-center justify-center pt-28 pb-20 text-center">
+    <Reveal class="flex flex-col items-center gap-7">
+      <Badge>
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse-soft"></span>
+        Disponible para nuevos proyectos
+      </Badge>
+
+      <h1 class="display max-w-4xl text-5xl leading-[1.04] sm:text-6xl lg:text-7xl">
+        Tu negocio en línea
+        <span class="relative inline-block text-accent-500">
+          esta semana
+          <span
+            class="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-accent-500/40 blur-[2px]"
+            aria-hidden="true"
+          ></span>
+        </span>
+      </h1>
+
+      <p class="max-w-2xl text-lg leading-relaxed text-ink/65 dark:text-paper/65">
+        Diseño y desarrollo webs premium para negocios que quieren más clientes.
+        WhatsApp integrado, diseño a medida y entrega en días, no en meses.
+      </p>
+
+      <div class="mt-2 flex flex-col items-center gap-3 sm:flex-row">
+        <Button href={whatsappLink('Hola Felipe, quiero una web premium para mi negocio.')}>
+          <WhatsAppIcon class="h-5 w-5" />
+          Hablemos por WhatsApp
+        </Button>
+        <Button variant="secondary" href="#portafolio">
+          Ver portafolio
+        </Button>
+      </div>
+
+      <p class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-mono text-xs tracking-[0.2em] text-ink/45 uppercase dark:text-paper/45">
+        <span>Entrega 5–7 días</span>
+        <span class="text-accent-500">/</span>
+        <span>Diseño a medida</span>
+        <span class="text-accent-500">/</span>
+        <span>Sin plantillas</span>
+      </p>
+    </Reveal>
+
+    <div class="mt-20 grid w-full max-w-4xl gap-4 sm:grid-cols-3">
+      {
+        stats.map((s, i) => (
+          <Reveal
+            delay={120 + i * 120}
+            class="card flex flex-col items-center gap-1 px-6 py-7"
+          >
+            <span class="display text-3xl text-accent-500">{s.value}</span>
+            <span class="font-mono text-xs tracking-[0.2em] uppercase text-ink/45 dark:text-paper/45">
+              {s.unit}
+            </span>
+            <span class="mt-1 text-sm text-ink/60 dark:text-paper/60">{s.label}</span>
+          </Reveal>
+        ))
+      }
+    </div>
+
+    <Reveal delay={200} class="mt-10 flex items-center gap-2 text-xs text-ink/45 dark:text-paper/45">
+      <Icon name="lucide:sparkles" width={16} height={16} class="h-4 w-4 text-accent-500" />
+      Cada proyecto se diseña pensando en que tu teléfono suene más.
+    </Reveal>
+  </div>
+</section>

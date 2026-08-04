@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { whatsappLink } from '../lib/site';
+---
+
+<Layout title="Página no encontrada — Felipe León Web Studio" description="La página que buscas no existe.">
+  <section class="shell flex min-h-[70svh] flex-col items-center justify-center py-28 text-center">
+    <span class="font-mono text-sm tracking-[0.3em] text-accent-500 uppercase">Error 404</span>
+    <h1 class="display mt-5 text-4xl sm:text-6xl">Esta página no existe</h1>
+    <p class="mt-5 max-w-md text-ink/65 dark:text-paper/65">
+      El enlace está roto o la página se movió. Volvamos a lo que sí funciona: tu negocio
+      en línea.
+    </p>
+    <a href="/" class="btn-primary mt-9 px-7 py-3.5 text-sm">
+      Volver al inicio
+    </a>
+    <a
+      href={whatsappLink('Hola Felipe, llegué a una página que no existe en tu sitio.')}
+      target="_blank"
+      rel="noopener"
+      class="btn-secondary mt-3 px-7 py-3.5 text-sm"
+    >
+      Contactar por WhatsApp
+    </a>
+  </section>
+</Layout>

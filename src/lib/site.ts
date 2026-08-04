@@ -1,0 +1,24 @@
+export const SITE = {
+  name: 'Felipe León Web Studio',
+  shortName: 'Felipe León',
+  tagline: 'Tu negocio en línea esta semana',
+  description:
+    'Diseño y desarrollo de páginas web premium para negocios que quieren más clientes. Entrega rápida, WhatsApp integrado y diseño a medida — sin plantillas.',
+  whatsapp: '573104885609',
+  email: 'fmleom19@gmail.com',
+  instagram: 'felieleonmm',
+  location: 'Colombia',
+  priceAnchor: 'desde $1.500.000 COP',
+  nav: [
+    { label: 'Inicio', href: '#inicio' },
+    { label: 'Sobre mí', href: '#sobre-mi' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Portafolio', href: '#portafolio' },
+    { label: 'Precios', href: '#precios' },
+    { label: 'FAQ', href: '#faq' },
+  ],
+} as const;
+
+export function whatsappLink(message: string) {
+  return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+}

@@ -1,0 +1,164 @@
+---
+import { whatsappLink } from '../lib/site';
+import WhatsAppIcon from './ui/WhatsAppIcon.astro';
+import { Icon } from 'astro-icon/components';
+
+const links = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Portafolio', href: '#portafolio' },
+  { label: 'Precios', href: '#precios' },
+  { label: 'FAQ', href: '#faq' },
+];
+---
+
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+  <div class="shell flex h-16 items-center justify-between">
+    <a href="#inicio" class="flex items-center gap-2.5" aria-label="Felipe León Web Studio, inicio">
+      <img
+        src="/logo.png"
+        alt=""
+        width={32}
+        height={32}
+        class="h-8 w-8 shrink-0 rounded-md object-contain"
+      />
+      <span class="font-display font-bold tracking-tight">Felipe León</span>
+      <span class="hidden font-mono text-xs font-medium tracking-[0.2em] text-ink/45 uppercase dark:text-paper/45 sm:inline">
+        web studio
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Principal">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class="text-sm font-medium text-ink/70 transition-colors hover:text-accent-600 dark:text-paper/70 dark:hover:text-accent-300"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Cambiar tema de color"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-ink/70 transition hover:text-accent-600 dark:border-line-dark dark:text-paper/70 dark:hover:text-accent-300"
+      >
+        <Icon name="lucide:moon" width={16} height={16} class="icon-moon h-4 w-4" />
+        <Icon name="lucide:sun" width={16} height={16} class="icon-sun h-4 w-4" />
+      </button>
+
+      <a
+        href={whatsappLink('Hola Felipe, quiero cotizar una página web para mi negocio.')}
+        target="_blank"
+        rel="noopener"
+        class="btn-primary hidden px-4 py-2 text-sm sm:inline-flex"
+      >
+        <WhatsAppIcon class="h-4 w-4" />
+        Cotizar
+      </a>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-ink transition hover:text-accent-600 dark:border-line-dark dark:text-paper lg:hidden"
+      >
+        <Icon name="lucide:menu" width={20} height={20} class="h-5 w-5" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden lg:hidden">
+    <div class="shell flex flex-col gap-1 border-t border-line pb-8 pt-4 dark:border-line-dark">
+      {
+        links.map((l, i) => (
+          <a
+            href={l.href}
+            class="rounded-xl px-4 py-3 font-display text-2xl font-bold text-ink/80 transition-colors hover:bg-paper-soft hover:text-accent-600 dark:text-paper/80 dark:hover:bg-ink-soft dark:hover:text-accent-300"
+          >
+            0{i + 1} {l.label}
+          </a>
+        ))
+      }
+      <a
+        href={whatsappLink('Hola Felipe, quiero cotizar una página web para mi negocio.')}
+        target="_blank"
+        rel="noopener"
+        class="btn-primary mt-6"
+      >
+        <WhatsAppIcon class="h-5 w-5" />
+        Cotizar por WhatsApp
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  header.is-scrolled {
+    background: color-mix(in srgb, var(--color-paper) 82%, transparent);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  :global(.dark) header.is-scrolled {
+    background: color-mix(in srgb, var(--color-ink) 82%, transparent);
+    border-bottom: 1px solid var(--color-line-dark);
+  }
+
+  .icon-sun {
+    display: none;
+  }
+
+  :global(.dark) .icon-moon {
+    display: none;
+  }
+
+  :global(.dark) .icon-sun {
+    display: block;
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('#site-header');
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const menuToggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    if (menuToggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    } else {
+      menu?.classList.remove('hidden');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+
+  const themeToggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
+  themeToggle?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    } catch {}
+  });
+</script>

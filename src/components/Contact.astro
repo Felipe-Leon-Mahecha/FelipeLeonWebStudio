@@ -1,0 +1,141 @@
+---
+import Reveal from './ui/Reveal.astro';
+import WhatsAppIcon from './ui/WhatsAppIcon.astro';
+import { SITE, whatsappLink } from '../lib/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="contacto" class="bg-paper-soft/50 py-24 dark:bg-ink-soft/50">
+  <div class="shell">
+    <div class="grid gap-14 lg:grid-cols-2 lg:gap-20">
+      <Reveal>
+        <p class="eyebrow">Contacto</p>
+        <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-5xl">
+          Hablemos de tu proyecto
+        </h2>
+        <p class="mt-5 leading-relaxed text-ink/65 dark:text-paper/65">
+          Cuéntame sobre tu negocio y qué necesitas. Te respondo el mismo día con una
+          propuesta clara y un precio cerrado. Sin compromiso.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          <a
+            href={whatsappLink('Hola Felipe, quiero una web para mi negocio.')}
+            target="_blank"
+            rel="noopener"
+            class="btn-primary w-full justify-start sm:w-auto"
+          >
+            <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+            Escríbeme por WhatsApp
+          </a>
+
+          <ul class="space-y-3 text-sm">
+            <li>
+              <a
+                href={`mailto:${SITE.email}`}
+                class="inline-flex items-center gap-2.5 text-ink/70 transition hover:text-accent-600 dark:text-paper/70 dark:hover:text-accent-300"
+              >
+                <Icon name="lucide:mail" width={16} height={16} class="h-4 w-4 text-accent-500" />
+                {SITE.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`https://instagram.com/${SITE.instagram}`}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-2.5 text-ink/70 transition hover:text-accent-600 dark:text-paper/70 dark:hover:text-accent-300"
+              >
+                <Icon name="lucide:instagram" width={16} height={16} class="h-4 w-4 text-accent-500" />
+                @{SITE.instagram}
+              </a>
+            </li>
+            <li class="inline-flex items-center gap-2.5 text-ink/60 dark:text-paper/60">
+              <Icon name="lucide:clock" width={16} height={16} class="h-4 w-4 text-accent-500" />
+              Respondo en menos de 24 horas
+            </li>
+          </ul>
+        </div>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <form
+          id="contact-form"
+          class="card p-7 sm:p-9"
+          novalidate
+        >
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="nombre" class="mb-2 block font-mono text-xs tracking-wider text-ink/60 uppercase dark:text-paper/60">
+                Tu nombre
+              </label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                required
+                placeholder="Ej: Juan Pérez"
+                class="w-full rounded-xl border border-line-strong bg-paper px-4 py-3 text-sm outline-none transition focus:border-accent-500 dark:border-line-dark-strong dark:bg-ink"
+              />
+            </div>
+            <div>
+              <label for="negocio" class="mb-2 block font-mono text-xs tracking-wider text-ink/60 uppercase dark:text-paper/60">
+                Tu negocio
+              </label>
+              <input
+                id="negocio"
+                name="negocio"
+                type="text"
+                placeholder="Ej: Barbería El Corte"
+                class="w-full rounded-xl border border-line-strong bg-paper px-4 py-3 text-sm outline-none transition focus:border-accent-500 dark:border-line-dark-strong dark:bg-ink"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label for="mensaje" class="mb-2 block font-mono text-xs tracking-wider text-ink/60 uppercase dark:text-paper/60">
+              ¿Qué necesitas?
+            </label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              required
+              placeholder="Quiero una web para mi negocio con WhatsApp..."
+              class="w-full resize-none rounded-xl border border-line-strong bg-paper px-4 py-3 text-sm outline-none transition focus:border-accent-500 dark:border-line-dark-strong dark:bg-ink"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary mt-6 w-full">
+            <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+            Enviar por WhatsApp
+          </button>
+
+          <p class="mt-4 text-center font-mono text-xs text-ink/45 dark:text-paper/45">
+            Al enviar se abrirá WhatsApp con tu mensaje listo. Tú decides si enviarlo.
+          </p>
+        </form>
+      </Reveal>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { whatsappLink } from '../lib/site';
+
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const nombre = data.get('nombre')?.toString().trim();
+    const negocio = data.get('negocio')?.toString().trim();
+    const mensaje = data.get('mensaje')?.toString().trim();
+
+    let text = `Hola Felipe, soy ${nombre}.`;
+    if (negocio) text += ` Mi negocio es ${negocio}.`;
+    if (mensaje) text += ` ${mensaje}`;
+
+    window.open(whatsappLink(text), '_blank', 'noopener');
+  });
+</script>

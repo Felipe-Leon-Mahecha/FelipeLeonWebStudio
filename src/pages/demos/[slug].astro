@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import WhatsAppIcon from '../../components/ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+export async function getStaticPaths() {
+  const demos = await getCollection('demos');
+  return demos.map((demo) => ({
+    params: { slug: demo.data.slug },
+    props: { demo },
+  }));
+}
+
+const { demo } = Astro.props;
+const { Content } = await render(demo);
+const gradient = `linear-gradient(135deg, ${demo.data.palette[0]}, ${demo.data.palette[1]})`;
+const waMessage = `Hola Felipe, vi la demo de ${demo.data.title} y quiero una página así para mi ${demo.data.industry}.`;
+---
+
+<Layout title={`${demo.data.title} — ${demo.data.industry} | Demo | Felipe León Web Studio`} description={demo.data.tagline}>
+  <div
+    class="relative overflow-hidden"
+    style={`background: ${gradient}`}
+  >
+    <div class="bg-grid absolute inset-0 opacity-25" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-ink/30" aria-hidden="true"></div>
+
+    <div class="shell relative flex min-h-[80svh] flex-col items-center justify-center py-28 text-center text-white">
+      <span class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 font-mono text-xs tracking-[0.2em] uppercase backdrop-blur">
+        {demo.data.industry} · Demo
+      </span>
+
+      <h1 class="display mt-6 max-w-3xl text-4xl drop-shadow-lg sm:text-6xl">
+        {demo.data.title}
+      </h1>
+      <p class="mt-4 max-w-xl text-lg text-white/85">{demo.data.tagline}</p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a
+          href={whatsappLink(waMessage)}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+          style={`background: ${demo.data.accent}`}
+        >
+          <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+          {demo.data.cta}
+        </a>
+        <Button variant="secondary" href="/#portafolio">
+          Ver más demos
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell grid gap-14 py-24 lg:grid-cols-[1.1fr_1fr]">
+    <div>
+      <p class="eyebrow">Sobre este proyecto</p>
+      <p class="mt-4 text-lg leading-relaxed text-ink/70 dark:text-paper/70">
+        {demo.data.description}
+      </p>
+
+      <div class="mt-10">
+        <Content />
+      </div>
+    </div>
+
+    <div>
+      <div class="card p-7">
+        <p class="font-mono text-xs tracking-[0.25em] text-accent-500 uppercase">
+          Incluye esta web
+        </p>
+        <ul class="mt-5 space-y-3">
+          {
+            demo.data.features.map((f) => (
+              <li class="flex items-start gap-3 text-sm text-ink/70 dark:text-paper/70">
+                <Icon
+                  name="lucide:check"
+                  width={16}
+                  height={16}
+                  class="mt-0.5 h-4 w-4 shrink-0 text-brand-500"
+                />
+                {f}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="card mt-5 p-7">
+        <p class="font-mono text-xs tracking-[0.25em] text-accent-500 uppercase">
+          Paleta de marca
+        </p>
+        <div class="mt-5 grid grid-cols-2 gap-3">
+          {
+            demo.data.palette.map((color) => (
+              <div class="overflow-hidden rounded-xl border border-line dark:border-line-dark">
+                <div class="h-16" style={`background: ${color}`}></div>
+                <p class="bg-paper-soft px-3 py-2 font-mono text-xs text-ink/60 dark:bg-ink-soft dark:text-paper/60">
+                  {color}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="bg-paper-soft/50 py-24 text-center dark:bg-ink-soft/50">
+    <div class="shell">
+      <h2 class="display text-3xl sm:text-4xl">¿Te gustó esta demo?</h2>
+      <p class="mx-auto mt-4 max-w-xl text-ink/65 dark:text-paper/65">
+        Tu negocio puede tener una web así de buena, adaptada a tu marca, lista esta
+        semana.
+      </p>
+      <Button href={whatsappLink(waMessage)} class="mt-8">
+        <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+        Quiero una página como esta
+      </Button>
+    </div>
+  </section>
+</Layout>

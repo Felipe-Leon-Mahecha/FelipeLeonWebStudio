@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import Reveal from './ui/Reveal.astro';
+import Button from './ui/Button.astro';
+import WhatsAppIcon from './ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../lib/site';
+
+const demos = (await getCollection('demos')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="portafolio" class="py-24">
+  <div class="shell">
+    <Reveal class="max-w-2xl">
+      <p class="eyebrow">Portafolio</p>
+      <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-5xl">
+        Demos reales, listas para tu negocio
+      </h2>
+      <p class="mt-5 leading-relaxed text-ink/65 dark:text-paper/65">
+        Estas no son capturas de stock: son webs completas que puedes abrir, tocar y
+        navegar. Si tu negocio se parece a alguna, yo te construyo la tuya igual de buena.
+      </p>
+    </Reveal>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2">
+      {
+        demos.map((demo, i) => (
+          <Reveal
+            delay={(i % 2) * 120}
+            class="card group flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]"
+          >
+            <a href={`/demos/${demo.data.slug}`} class="block">
+              <div
+                class="flex items-center gap-1.5 border-b border-line bg-paper-soft/70 px-4 py-3 dark:border-line-dark dark:bg-ink-soft/70"
+              >
+                <span class="h-2.5 w-2.5 rounded-full bg-line-strong dark:bg-line-dark-strong"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-line-strong dark:bg-line-dark-strong"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-line-strong dark:bg-line-dark-strong"></span>
+                <span class="ml-3 truncate font-mono text-xs text-ink/45 dark:text-paper/45">
+                  {demo.data.slug}.com
+                </span>
+              </div>
+
+              <div
+                class="relative flex h-52 items-center justify-center overflow-hidden"
+                style={`background: linear-gradient(135deg, ${demo.data.palette[0]}, ${demo.data.palette[1]})`}
+              >
+                <div class="bg-grid absolute inset-0 opacity-30" aria-hidden="true"></div>
+                <div class="absolute inset-0 bg-ink/20" aria-hidden="true"></div>
+                <span class="display relative px-6 text-center text-3xl text-white drop-shadow-lg">
+                  {demo.data.title}
+                </span>
+              </div>
+            </a>
+
+            <div class="flex flex-1 flex-col p-6">
+              <div class="flex items-center justify-between gap-3">
+                <span class="font-mono text-xs font-medium tracking-[0.2em] text-accent-500 uppercase">
+                  {demo.data.industry}
+                </span>
+              </div>
+
+              <h3 class="mt-2 font-display text-xl font-bold">{demo.data.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink/60 dark:text-paper/60">
+                {demo.data.tagline}
+              </p>
+
+              <ul class="mt-4 flex flex-wrap gap-1.5">
+                {
+                  demo.data.features.slice(0, 3).map((f) => (
+                    <li
+                      class="rounded-full border border-line-strong px-3 py-1 font-mono text-[11px] text-ink/55 dark:border-line-dark dark:text-paper/55"
+                    >
+                      {f}
+                    </li>
+                  ))
+                }
+              </ul>
+
+              <div class="mt-6 flex gap-3 pt-2">
+                <Button href={`/demos/${demo.data.slug}`} size="md" class="flex-1">
+                  Ver demo
+                </Button>
+                <a
+                  href={whatsappLink(
+                    `Hola Felipe, vi la demo de ${demo.data.title} y quiero una página así para mi ${demo.data.industry}.`
+                  )}
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-secondary px-4 py-2 text-sm"
+                  aria-label={`Quiero una página como ${demo.data.title}`}
+                >
+                  <WhatsAppIcon width={16} height={16} class="h-4 w-4" />
+                  Quiero una así
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+</section>
