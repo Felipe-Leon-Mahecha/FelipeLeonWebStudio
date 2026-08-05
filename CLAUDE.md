@@ -16,7 +16,7 @@ Guía para trabajar en **Felipe León Web Studio** (Astro 7 + Tailwind v4 + Type
 3. Respetar el design system de `src/styles/global.css`. No inventar colores ni fuentes nuevas.
 4. Todo cambio visual respeta `prefers-reduced-motion` (hay una regla global que frena animaciones).
 5. Contacto real centralizado en `src/lib/site.ts` (NO hardcodear WhatsApp/email). Usa `whatsappLink()`.
-6. Moneda y precios en **COP**. Ancla de precio: `desde $1.500.000 COP`.
+6. Moneda y precios en **COP**. Ancla de precio: `desde $500.000 COP`.
 7. Dark mode: Tailwind v4 usa `@custom-variant dark (&:where(.dark, .dark *))`. En `<style>` escopeados de componentes, los selectores de tema requieren **`:global(.dark)`** (ej: `:global(.dark) .foo`), porque Astro escopea las clases. NO usar `.dark` plano en estilos escopeados.
 8. Colecciones de contenido en Astro 7: cargar con `glob()` de `astro/loaders` en `src/content.config.ts` (NO `type: 'content'`, deprecado). Schema con `z` importado de `'zod'`.
 

@@ -8,7 +8,7 @@ export const SITE = {
   email: 'fmleom19@gmail.com',
   instagram: 'felieleonmm',
   location: 'Colombia',
-  priceAnchor: 'desde $1.500.000 COP',
+  priceAnchor: 'desde $500.000 COP',
   analyticsId: '',
   nav: [
     { label: 'Inicio', href: '#inicio' },

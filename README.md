@@ -1,43 +1,70 @@
-# Astro Starter Kit: Minimal
+# Felipe León Web Studio
 
-```sh
-npm create astro@latest -- --template minimal
+**Páginas web premium para negocios que quieren más clientes.** Diseño a medida (cero
+plantillas), WhatsApp integrado y entrega en 5–7 días. Hecho en Colombia 🇨🇴.
+
+Sitio en vivo: **https://felipe-leon-web-studio.vercel.app**
+
+## Qué es
+
+Landing + portafolio de Felipe León, desarrollador web independiente. Incluye 4 demos
+navegables (barbería, salón de belleza, tienda de mercados y veterinaria) que funcionan
+como catálogo de plantillas para clientes reales.
+
+## Características
+
+- ⚡ **Diseño a medida** con identidad de marca propia por cliente (paleta + acento).
+- 💬 **WhatsApp integrado** en cada sección y en cada demo (CTAs con mensaje pre-llenado).
+- 🎨 **4 demos reales navegables** que muestran el trabajo terminado.
+- 🌙 **Modo oscuro/claro** con animaciones que respetan `prefers-reduced-motion`.
+- 🚀 **Despliegue automático** con Vercel conectado a GitHub.
+- 🔍 SEO: sitemap, robots.txt, JSON-LD, metas Open Graph y og-image.
+- 📊 Analytics GA4 listo (se activa llenando `analyticsId` en `src/lib/site.ts`).
+
+## Stack
+
+- [Astro 7](https://astro.build) + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [astro-icon](https://astro-icon.dev) (íconos Lucide)
+- Fuentes auto-hospedadas (Inter, Space Grotesk, JetBrains Mono)
+- Desplegado en [Vercel](https://vercel.com)
+
+## Empezar
+
+```bash
+npm install
+npx astro dev --background   # servidor en http://localhost:4321
+npx astro dev logs           # ver errores
+npm run build                # build de producción
+npx astro check              # typecheck (0 errores)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+  pages/            → index.astro, 404.astro, demos/[slug].astro
+  components/       → secciones de la landing + demos/ (micro-sitios)
+  layouts/          → Layout.astro (sitio) y DemoLayout.astro (demos)
+  content/demos/    → datos de las 4 demos (frontmatter)
+  lib/site.ts       → CONFIG CENTRAL: nombre, WhatsApp, email, precios
+  styles/global.css → design system (tokens Tailwind v4)
+public/             → logo, favicon, og.png, robots.txt
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+> **Tip:** toda la información de marca/contacto vive en `src/lib/site.ts`. No la repitas
+> en los componentes.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Precios (COP)
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Paquete | Precio | Entrega |
+|---|---|---|
+| Página Simple | desde $500.000 | 5–7 días |
+| Sitio Completo | desde $900.000 | 5–7 días |
+| Tienda / Panel | desde $1.500.000 | 7–10 días |
 
-## 🧞 Commands
+## Contacto
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- WhatsApp: +57 310 488 5609
+- Email: fmleom19@gmail.com
+- Instagram: [@felieleonmm](https://instagram.com/felieleonmm)

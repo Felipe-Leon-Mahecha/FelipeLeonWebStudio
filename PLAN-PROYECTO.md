@@ -122,14 +122,16 @@ reutilizables (biblioteca de plantillas para clientes reales).
 
 | Paquete | Precio | Incluye | Entrega |
 |---|---|---|---|
-| Landing Page | desde $1.500.000 COP | 1 página, diseño a medida, WhatsApp, formulario, SEO básico, responsive, 30 días de ajustes | 5-7 días |
-| Sitio Completo | desde $3.500.000 COP | 5-7 páginas, catálogo/blog, WhatsApp, SEO | 2-3 semanas |
-| Tienda / Panel Admin | desde $6.000.000 COP | Catálogo, pedidos por WhatsApp, panel sencillo, pasarela | 3-4 semanas |
+| Página Simple | desde $500.000 COP | 1 página, diseño a medida, WhatsApp, SEO básico, responsive, 30 días de ajustes | 5-7 días |
+| Sitio Completo | desde $900.000 COP | varias secciones, servicios con precios, galería, WhatsApp, SEO | 5-7 días |
+| Tienda / Panel Admin | desde $1.500.000 COP | Catálogo, pedidos por WhatsApp, panel sencillo, pasarela | 7-10 días |
 
-- **Mantenimiento mensual (ingreso recurrente):** desde $250.000 COP (hosting + dominio
+- **Mantenimiento mensual (ingreso recurrente):** desde $150.000 COP (hosting + dominio
   + backups + soporte + mejoras menores).
-- **NO bajar de $1.500.000 en landing** al vender. Si piden más barato: "para ese
-  presupuesto existe Wix; yo hago lo que Wix no puede."
+- **Estrategia de precios (Paipa, arranque):** ancla baja `desde $500.000` para conseguir
+  los primeros clientes y testimonios rápido. Escalera: 500K → 900K → 1.5M. Subir cuando
+  se tengan 3-5 clientes y reseñas. No regalar el trabajo: un sitio simple real toma 2-4
+  horas con plantilla + despliegue.
 - Referencias de mercado Colombia 2026: landing $800K–2.5M, corporativo $2.5M–5.5M,
   e-commerce $4M–12M, mantenimiento $120K–500K/mes.
 

@@ -19,13 +19,14 @@ Copia y adapta esto por WhatsApp:
 > "¡Hola! Claro que sí, te hago la página. Te muestro ejemplos reales de lo que hago:
 > [link de la demo que más se parezca al negocio del cliente].
 > Tu página quedaría así pero con TU marca, TU información y TU WhatsApp.
-> El costo es desde $1.500.000 COP y te la entrego en 5–7 días. Para empezar necesito un
+> El costo es desde $500.000 COP y te la entrego en 5–7 días. Para empezar necesito un
 > 50% de anticipo y me cuentas los datos de tu negocio."
 
 Reglas de oro de este mensaje:
 - **Siempre manda una demo** (nadie compra "una página"; compra "así le quedaría a mi negocio").
 - **Cobra anticipo 50%** antes de escribir UNA línea de código.
-- No pongas precio con "depende": pon el ancla (desde $1.500.000) y sube según complejidad.
+- No pongas precio con "depende": pon el ancla (desde $500.000) y sube según complejidad
+  (escalera: 500K simple → 900K completo → 1.5M tienda).
 
 ## 3. Qué datos pedirle al cliente (plantilla)
 
