@@ -7,15 +7,15 @@ Sitio en vivo: **https://felipe-leon-web-studio.vercel.app**
 
 ## Qué es
 
-Landing + portafolio de Felipe León, desarrollador web independiente. Incluye 4 demos
-navegables (barbería, salón de belleza, tienda de mercados y veterinaria) que funcionan
-como catálogo de plantillas para clientes reales.
+Landing + portafolio de Felipe León, desarrollador web independiente. Incluye 6 demos
+navegables (barbería, salón de belleza, tienda de mercados, veterinaria, estudio de
+uñas y restaurante/café) que funcionan como catálogo de plantillas para clientes reales.
 
 ## Características
 
 - ⚡ **Diseño a medida** con identidad de marca propia por cliente (paleta + acento).
 - 💬 **WhatsApp integrado** en cada sección y en cada demo (CTAs con mensaje pre-llenado).
-- 🎨 **4 demos reales navegables** que muestran el trabajo terminado.
+- 🎨 **6 demos reales navegables** que muestran el trabajo terminado.
 - 🌙 **Modo oscuro/claro** con animaciones que respetan `prefers-reduced-motion`.
 - 🚀 **Despliegue automático** con Vercel conectado a GitHub.
 - 🔍 SEO: sitemap, robots.txt, JSON-LD, metas Open Graph y og-image.
@@ -46,7 +46,7 @@ src/
   pages/            → index.astro, 404.astro, demos/[slug].astro
   components/       → secciones de la landing + demos/ (micro-sitios)
   layouts/          → Layout.astro (sitio) y DemoLayout.astro (demos)
-  content/demos/    → datos de las 4 demos (frontmatter)
+  content/demos/    → datos de las 6 demos (frontmatter)
   lib/site.ts       → CONFIG CENTRAL: nombre, WhatsApp, email, precios
   styles/global.css → design system (tokens Tailwind v4)
 public/             → logo, favicon, og.png, robots.txt

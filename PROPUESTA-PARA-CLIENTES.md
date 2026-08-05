@@ -55,8 +55,10 @@ Mira ejemplos reales que ya funcionan — webs completas que puedes abrir y nave
 
 - Barbería → https://felipe-leon-web-studio.vercel.app/demos/barberia
 - Salón de belleza → https://felipe-leon-web-studio.vercel.app/demos/boutique
+- Estudio de uñas / pies y manos → https://felipe-leon-web-studio.vercel.app/demos/unas
 - Tienda de mercados → https://felipe-leon-web-studio.vercel.app/demos/mercados
 - Veterinaria → https://felipe-leon-web-studio.vercel.app/demos/veterinaria
+- Restaurante / Café → https://felipe-leon-web-studio.vercel.app/demos/restaurante
 
 Tu página se vería así de bien, pero con **tu** negocio, **tu** marca y **tu**
 WhatsApp.

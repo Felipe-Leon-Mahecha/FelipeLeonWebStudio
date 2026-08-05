@@ -1,0 +1,215 @@
+---
+import DemoStrip from './DemoStrip.astro';
+import DemoHeader from './DemoHeader.astro';
+import DemoHero from './DemoHero.astro';
+import DemoFooter from './DemoFooter.astro';
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const accent = '#e8562f';
+const base = '#fff7ef';
+const surface = '#ffffff';
+
+const dishes = [
+  { icon: 'lucide:utensils', name: 'Bandeja paisa', price: '$32.000', desc: 'Fríjol, arroz, chicharrón, huevo, aguacate y arepa.' },
+  { icon: 'lucide:soup', name: 'Ajiaco santafereño', price: '$28.000', desc: 'Tres papas, mazorca, pollo, alcaparras y crema.', hot: true },
+  { icon: 'lucide:flame', name: 'Sancocho de gallina', price: '$26.000', desc: 'Con yuca, plátano, papa y hogao de la casa.' },
+  { icon: 'lucide:chef-hat', name: 'Churrasco criollo', price: '$38.000', desc: 'Punta de anca, papa chorreada y ensalada.' },
+  { icon: 'lucide:ice-cream', name: 'Postre de breva', price: '$12.000', desc: 'Con arequipe artesanal y queso costeño.' },
+  { icon: 'lucide:coffee', name: 'Café de origen', price: '$8.000', desc: 'Tinto de la región, recién colado.' },
+];
+
+const steps = [
+  { n: '01', title: 'Elige tu mesa', desc: 'Nos dices cuántos son y a qué hora llegan.' },
+  { n: '02', title: 'Envía por WhatsApp', desc: 'Un solo mensaje: fecha, hora y número de personas.' },
+  { n: '03', title: 'Confirmamos al instante', desc: 'Te respondemos con tu reserva lista.' },
+  { n: '04', title: 'Llega y disfruta', desc: 'Tu mesa te espera con el hogao listo.' },
+];
+
+const testimonials = [
+  { text: 'El ajiaco es el mejor de la ciudad. Volvemos cada semana.', name: 'Familia Gutiérrez', tag: 'Clientes desde 2023' },
+  { text: 'Pedimos domicilio para el almuerzo y llegó caliente y puntual.', name: 'Carlos V.', tag: 'Domicilios' },
+  { text: 'Reservar por WhatsApp es facilísimo y la atención es excelente.', name: 'Lina T.', tag: 'Reserva de mesa' },
+];
+
+const hours = [
+  ['Lunes a viernes', '11:00 am – 9:00 pm'],
+  ['Sábado', '10:00 am – 10:00 pm'],
+  ['Domingo', '11:00 am – 6:00 pm'],
+];
+
+const wa = whatsappLink('Hola, quiero reservar una mesa en Sazón Criollo. ¿Me cuentan disponibilidad?');
+---
+
+<DemoStrip slug="restaurante" brand="Sazón Criollo" />
+<DemoHeader
+  brand="Sazón Criollo"
+  accent={accent}
+  links={[
+    { label: 'Menú', href: '#menu' },
+    { label: 'Reservas', href: '#reservas' },
+    { label: 'Testimonios', href: '#testimonios' },
+    { label: 'Horarios', href: '#horarios' },
+  ]}
+  ctaText="Reservar mesa"
+  ctaHref={wa}
+  light
+/>
+
+<main style={`background:${base}`}>
+  <DemoHero
+    badge="Cocina colombiana · Centro"
+    titleA="Sabor de la casa,"
+    titleB="de regreso cada semana."
+    tagline="Platos típicos preparados como en casa, reservas fáciles por WhatsApp y domicilios disponibles. Llega, te esperamos con mesa lista."
+    accent={accent}
+    palette={['#fff7ef', '#f5ddc4']}
+    ctaText="Reservar mesa"
+    ctaHref={wa}
+    secondaryText="Ver menú"
+    secondaryHref="#menu"
+    meta={['Menú con precios', 'Reservas por WhatsApp', 'Domicilios']}
+  />
+
+  <section id="menu" class="py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Menú de la casa
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Los platos que nos hacen famosos</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {dishes.map((d) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(232,86,47,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(232,86,47,0.14)]"
+            style={`background:${surface}`}
+          >
+            {d.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                style={`background:${accent}`}
+              >
+                Más pedido
+              </span>
+            )}
+            <Icon
+              name={d.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{d.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{d.desc}</p>
+            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+              {d.price}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="reservas" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Reservas
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Reservar tu mesa, sin llamadas</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
+            <span class="font-display text-4xl font-bold" style={`color:${accent}`}>{s.n}</span>
+            <h3 class="mt-4 font-display text-lg font-bold text-[#141414]">{s.title}</h3>
+            <p class="mt-2 text-sm text-[#141414]/60">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Testimonios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Comensales que vuelven</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <div class="flex flex-col rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
+            <div class="flex gap-1">
+              {[0, 1, 2, 3, 4].map(() => (
+                <Icon name="lucide:star" width={16} height={16} class="h-4 w-4 fill-current" style={`color:${accent}`} />
+              ))}
+            </div>
+            <p class="mt-5 flex-1 leading-relaxed text-[#141414]/75">“{t.text}”</p>
+            <p class="mt-6">
+              <span class="font-display font-bold text-[#141414]">{t.name}</span>
+              <span class="mt-0.5 block text-sm text-[#141414]/50">{t.tag}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="pb-24">
+    <div class="shell grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+          <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+        </div>
+        <ul class="mt-6 space-y-3">
+          {hours.map(([d, h]) => (
+            <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
+              <span class="text-[#141414]/60">{d}</span>
+              <span class="font-mono text-[#141414]">{h}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-4 text-sm text-[#141414]/50">Domicilios de lunes a sábado hasta las 8:00 pm.</p>
+      </div>
+
+      <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
+          </div>
+          <p class="mt-6 text-[#141414]/60">
+            Calle 12 # 4-25, frente al parque.
+            <br />
+            Parqueadero en la puerta y terraza disponible.
+          </p>
+        </div>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={`background:${accent}`}
+        >
+          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+          Reservar mesa
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<DemoFooter
+  brand="Sazón Criollo"
+  accent={accent}
+  ctaText="Reserva tu mesa hoy"
+  message="Hola, quiero reservar una mesa en Sazón Criollo. ¿Me cuentan disponibilidad?"
+/>

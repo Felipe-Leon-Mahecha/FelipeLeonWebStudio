@@ -5,6 +5,8 @@ import BarberiaDemo from '../../components/demos/BarberiaDemo.astro';
 import BoutiqueDemo from '../../components/demos/BoutiqueDemo.astro';
 import MercadosDemo from '../../components/demos/MercadosDemo.astro';
 import VeterinariaDemo from '../../components/demos/VeterinariaDemo.astro';
+import UnasDemo from '../../components/demos/UnasDemo.astro';
+import RestauranteDemo from '../../components/demos/RestauranteDemo.astro';
 
 export async function getStaticPaths() {
   const demos = await getCollection('demos');
@@ -20,6 +22,8 @@ const demoComponents = {
   boutique: BoutiqueDemo,
   mercados: MercadosDemo,
   veterinaria: VeterinariaDemo,
+  unas: UnasDemo,
+  restaurante: RestauranteDemo,
 } as const;
 
 const Demo = demoComponents[demo.data.slug as keyof typeof demoComponents];

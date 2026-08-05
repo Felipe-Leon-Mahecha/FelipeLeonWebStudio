@@ -1,0 +1,247 @@
+---
+import DemoStrip from './DemoStrip.astro';
+import DemoHeader from './DemoHeader.astro';
+import DemoHero from './DemoHero.astro';
+import DemoFooter from './DemoFooter.astro';
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const accent = '#b2376a';
+const base = '#fdf5f3';
+const surface = '#ffffff';
+
+const services = [
+  { icon: 'lucide:hand', name: 'Manicure básico', price: '$25.000', desc: 'Limpieza, cutícula y esmaltado tradicional.' },
+  { icon: 'lucide:sparkles', name: 'Manicure en gel', price: '$45.000', desc: 'Esmaltado en gel que dura hasta 3 semanas.', hot: true },
+  { icon: 'lucide:flower-2', name: 'Uñas acrílicas / press-on', price: '$60.000', desc: 'Extensión o uñas postizas con tu estilo.' },
+  { icon: 'lucide:footprints', name: 'Pedicure spa', price: '$55.000', desc: 'Pies exfoliados, hidratados y con masaje.' },
+  { icon: 'lucide:droplets', name: 'Tratamiento de pies y manos', price: '$40.000', desc: 'Cuidado profundo con parafina y cremas.' },
+  { icon: 'lucide:palette', name: 'Decoración y arte', price: '$15.000', desc: 'Diseños a mano, brillos y tendencias.' },
+];
+
+const products = [
+  { icon: 'lucide:shopping-bag', name: 'Kit press-on listo', price: '$38.000', desc: 'Set de 24 uñas con adhesivos, 5 estilos.', hot: true },
+  { icon: 'lucide:droplets', name: 'Crema para manos', price: '$22.000', desc: 'Hidratación intensiva, uso diario.' },
+  { icon: 'lucide:brush', name: 'Esmalte semipermanente', price: '$28.000', desc: 'Colores de temporada, duración garantizada.' },
+  { icon: 'lucide:heart', name: 'Kit cuidado de pies', price: '$35.000', desc: 'Exfoliante, lima profesional y mascarilla.' },
+];
+
+const testimonials = [
+  { text: 'Mis uñas nunca habían durado tanto. El gel es una maravilla.', name: 'Mariana R.', tag: 'Clienta desde 2024' },
+  { text: 'El tratamiento de pies me salvó las vacaciones. Cero molestias.', name: 'Diana P.', tag: 'Pedicure spa' },
+  { text: 'Atención impecable y la tienda tiene cositas hermosas.', name: 'Sofía G.', tag: 'Preson y cremas' },
+];
+
+const hours = [
+  ['Lunes a viernes', '9:00 am – 7:00 pm'],
+  ['Sábado', '9:00 am – 6:00 pm'],
+  ['Domingo', 'Citas especiales'],
+];
+
+const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuentan disponibilidad?');
+---
+
+<DemoStrip slug="unas" brand="Luna Nails" />
+<DemoHeader
+  brand="Luna Nails"
+  accent={accent}
+  links={[
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Tienda', href: '#tienda' },
+    { label: 'Testimonios', href: '#testimonios' },
+    { label: 'Horarios', href: '#horarios' },
+  ]}
+  ctaText="Agendar cita"
+  ctaHref={wa}
+  light
+/>
+
+<main style={`background:${base}`}>
+  <DemoHero
+    badge="Estudio de uñas · Centro"
+    titleA="Uñas perfectas,"
+    titleB="manos y pies cuidados."
+    tagline="Manicure, pedicure y tratamiento de pies y manos con productos profesionales. Agenda tu cita en minutos por WhatsApp."
+    accent={accent}
+    palette={['#fdf5f3', '#f2dde2']}
+    ctaText="Agendar cita"
+    ctaHref={wa}
+    secondaryText="Ver servicios"
+    secondaryHref="#servicios"
+    meta={['Productos profesionales', 'Agenda fácil', 'Precios claros']}
+  />
+
+  <section id="servicios" class="py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Servicios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Cuidado para uñas, pies y manos</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(178,55,106,0.14)]"
+            style={`background:${surface}`}
+          >
+            {s.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                style={`background:${accent}`}
+              >
+                Más pedido
+              </span>
+            )}
+            <Icon
+              name={s.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{s.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{s.desc}</p>
+            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+              {s.price}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="tienda" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Mini-tienda
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Llévate el cuidado a casa</h2>
+        <p class="mt-5 text-[#141414]/60">
+          Productos que usamos en el estudio, listos para comprar por WhatsApp.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((p) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.05)] transition-all duration-300 hover:-translate-y-1"
+            style={`background:${surface}`}
+          >
+            {p.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                style={`background:${accent}`}
+              >
+                Nuevo
+              </span>
+            )}
+            <Icon
+              name={p.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-lg font-bold text-[#141414]">{p.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{p.desc}</p>
+            <p class="mt-4 flex items-center justify-between gap-3">
+              <span class="font-mono text-lg font-semibold" style={`color:${accent}`}>{p.price}</span>
+              <a
+                href={whatsappLink(`Hola, quiero comprar "${p.name}" en Luna Nails. ¿Está disponible?`)}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-white transition-transform hover:-translate-y-0.5"
+                style={`background:${accent}`}
+              >
+                <WhatsAppIcon width={14} height={14} class="h-3.5 w-3.5" />
+                Pedir
+              </a>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Testimonios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Clientas que vuelven</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <div class="flex flex-col rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
+            <div class="flex gap-1">
+              {[0, 1, 2, 3, 4].map(() => (
+                <Icon name="lucide:star" width={16} height={16} class="h-4 w-4 fill-current" style={`color:${accent}`} />
+              ))}
+            </div>
+            <p class="mt-5 flex-1 leading-relaxed text-[#141414]/75">“{t.text}”</p>
+            <p class="mt-6">
+              <span class="font-display font-bold text-[#141414]">{t.name}</span>
+              <span class="mt-0.5 block text-sm text-[#141414]/50">{t.tag}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="pb-24">
+    <div class="shell grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+          <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+        </div>
+        <ul class="mt-6 space-y-3">
+          {hours.map(([d, h]) => (
+            <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
+              <span class="text-[#141414]/60">{d}</span>
+              <span class="font-mono text-[#141414]">{h}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
+          </div>
+          <p class="mt-6 text-[#141414]/60">
+            Cra 24 # 56-08, Centro.
+            <br />
+            A 1 cuadra del parque principal. Café y galletas de bienvenida.
+          </p>
+        </div>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={`background:${accent}`}
+        >
+          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+          Agendar cita
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<DemoFooter
+  brand="Luna Nails"
+  accent={accent}
+  ctaText="Agenda tu cita hoy"
+  message="Hola, quiero agendar una cita en Luna Nails. ¿Me cuentan disponibilidad?"
+/>

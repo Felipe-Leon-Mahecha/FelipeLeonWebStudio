@@ -104,7 +104,7 @@ Default Project/
 │  ├─ pages/index.astro       # página principal (compone las secciones)
 │  ├─ pages/404.astro         # página de error 404 con CTA WhatsApp
 │  ├─ pages/demos/[slug].astro# página demo genérica (frontmatter + guía Markdown)
-│  ├─ content/demos/          # 4 archivos .md (barberia, boutique, mercados, veterinaria)
+│  ├─ content/demos/          # 6 archivos .md (barberia, boutique, mercados, veterinaria, unas, restaurante)
 │  ├─ content.config.ts       # esquema z + loader glob() (NO usar type:'content' en Astro 7)
 │  ├─ scripts/reveal.ts       # animaciones de scroll
 │  └─ styles/global.css       # design system (tokens Tailwind v4)
@@ -135,7 +135,7 @@ reutilizables (biblioteca de plantillas para clientes reales).
 - Referencias de mercado Colombia 2026: landing $800K–2.5M, corporativo $2.5M–5.5M,
   e-commerce $4M–12M, mantenimiento $120K–500K/mes.
 
-## 8. PORTAFOLIO (4 DEMOS PLANIFICADAS)
+## 8. PORTAFOLIO (6 DEMOS)
 
 Cada demo es un micro-sitio real con dos botones: "Ver demo" y "Quiero una página como
 esta" (abre WhatsApp con mensaje pre-llenado del tipo de negocio).
@@ -146,14 +146,16 @@ esta" (abre WhatsApp con mensaje pre-llenado del tipo de negocio).
 | 2 | Salón de belleza | Glow Studio | Femenino, elegante, acento rosa `#d24a7d` | Agenda de citas |
 | 3 | Tienda de mercados (food truck) | Mercado Rodante | Fresco, de barrio, acento verde `#2f9e44` | Ruta del día + pedidos |
 | 4 | Veterinaria | Patitas y Más | Limpio, confiable, acento teal `#2a9d8f` | Turnos + urgencias |
+| 5 | Uñas y Spa | Luna Nails | Femenino, cuidado, acento rubí `#b2376a` | Agenda + mini-tienda |
+| 6 | Restaurante / Café | Sazón Criollo | Cálido, casero, acento brasa `#e8562f` | Menú + reservas |
 
 Cada archivo `src/content/demos/*.md` incluye además una **guía en Markdown** (abajo del
 frontmatter) que la IA encargada de construir la demo debe seguir para maquetar el
 micro-sitio. **Las demos son la biblioteca de plantillas:** el primer cliente real de
 barbería ya tiene el 60% hecho.
 
-**Estado:** los 4 archivos `.md` existen y la sección Portafolio + página
-`/demos/[slug]` funcionan (build 5 páginas OK). Los micro-sitios propios de cada demo
+**Estado:** los 6 archivos `.md` existen y la sección Portafolio + página
+`/demos/[slug]` funcionan (build 8 páginas OK). Los micro-sitios propios de cada demo
 (hero real, servicios, galería, etc.) los construye otra IA a partir de la guía en cada
 `.md`.
 
@@ -266,9 +268,9 @@ El servidor de desarrollo corre en http://localhost:4321
     `G-XXXXXXX` en `src/lib/site.ts` (`analyticsId: 'G-XXXXXXX'`) y re-desplegar.
     ⚠️ Falta: dominio real en `astro.config.mjs` (todavía `https://felipeleon.example.com`).
 
-## 16. FASE 3b COMPLETADA — LOS 4 MICRO-SITIOS DEMO (RESUMEN)
+## 16. FASE 3b COMPLETADA — LOS 6 MICRO-SITIOS DEMO (RESUMEN)
 
-**Qué se construyó (16/08):** las 4 demos dejaron de ser "fichas de caso" y ahora son
+**Qué se construyó (16/08):** las demos dejaron de ser "fichas de caso" y ahora son
 **webs reales completas**, cada una con identidad de marca propia (paleta, acento, estilo):
 
 | Demo | Marca | Estilo | Acento |
@@ -277,6 +279,8 @@ El servidor de desarrollo corre en http://localhost:4321
 | `/demos/boutique` | Glow Studio | Rosa suave, femenino premium | `#d24a7d` |
 | `/demos/mercados` | Mercado Rodante | Crema + verde, de barrio confiable | `#2f9e44` |
 | `/demos/veterinaria` | Patitas y Más | Azul claro + teal, limpio y calmado | `#2a9d8f` |
+| `/demos/unas` | Luna Nails | Crema + rubí, femenino cuidado | `#b2376a` |
+| `/demos/restaurante` | Sazón Criollo | Crema cálido + brasa, casero | `#e8562f` |
 
 **Arquitectura:**
 - `src/layouts/DemoLayout.astro` → HTML propio (head SEO, sin header/footer de Felipe;
@@ -284,19 +288,20 @@ El servidor de desarrollo corre en http://localhost:4321
   `.display`, `.bg-grid`.
 - `src/components/demos/` → chrome compartido (DemoStrip con aspecto de navegador +
   botón "Quiero una página como esta" a WhatsApp; DemoHeader sticky; DemoHero;
-  DemoFooter con CTA final) + 4 componentes de demo (BarberiaDemo, BoutiqueDemo,
-  MercadosDemo, VeterinariaDemo) con secciones propias.
+  DemoFooter con CTA final) + 6 componentes de demo (BarberiaDemo, BoutiqueDemo,
+  MercadosDemo, VeterinariaDemo, UnasDemo, RestauranteDemo) con secciones propias.
 - `src/pages/demos/[slug].astro` → dispatcher: según `slug` renderiza la demo correcta.
 - Cada demo incluye: hero, servicios con precios COP, galería/equipo/testimonios,
   horarios y ubicación, banner de urgencias (veterinaria), ruta semanal + cómo pedir
-  (mercados). Sin fotos reales: se usan tiles con gradientes e íconos lucide.
+  (mercados), mini-tienda (unas), menú + reservas (restaurante). Sin fotos reales: se
+  usan tiles con gradientes e íconos lucide.
 - **Conversión:** la barrita superior (DemoStrip) y el CTA final de cada demo llevan a
   WhatsApp de Felipe con mensaje personalizado por industria.
 - ⚠️ Los textos de las marcas demo son **contenido ficticio de muestra** (para mostrar
   el trabajo); los precios COP son realistas. No usar estos datos de contacto reales.
 
-**Verificado:** `npx astro check` = 0 errores/warnings/hints. Build = 6 páginas OK.
-Las demos se ven en http://localhost:4321/demos/{barberia|boutique|mercados|veterinaria}.
+**Verificado:** `npx astro check` = 0 errores/warnings/hints. Build = 8 páginas OK.
+Las demos se ven en http://localhost:4321/demos/{barberia|boutique|mercados|veterinaria|unas|restaurante}.
 
 ## 14. INSTRUCCIONES PARA LA IA QUE CONTINÚE
 

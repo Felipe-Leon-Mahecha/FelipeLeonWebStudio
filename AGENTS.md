@@ -50,7 +50,7 @@ src/
     demos/[slug].astro → página demo genérica desde frontmatter
     404.astro
   content.config.ts    → colección `demos` con glob() de astro/loaders
-  content/demos/       → barberia.md, boutique.md, mercados.md, veterinaria.md
+  content/demos/       → barberia.md, boutique.md, mercados.md, veterinaria.md, unas.md, restaurante.md
   components/
     ui/                → Button, Badge, Gem, WhatsAppIcon, Reveal
     Header.astro       → tiene fix `:global(.dark)` para tema en estilos escopeados
@@ -69,8 +69,8 @@ astro.config.mjs       → site placeholder https://felipeleon.example.com (camb
 
 ## Estado del proyecto
 
-- F0-F3a completas (estrategia, base, secciones, portafolio + 4 demos, SEO). F4 pulido (build OK, check 0 errores).
-- F3b completada: los 4 micro-sitios demo reales viven en `src/components/demos/` y `src/layouts/DemoLayout.astro`, con dispatcher en `src/pages/demos/[slug].astro` (detalles en `PLAN-PROYECTO.md` sección 16).
+- F0-F3a completas (estrategia, base, secciones, portafolio + 6 demos, SEO). F4 pulido (build OK, check 0 errores).
+- F3b completada: los 6 micro-sitios demo reales viven en `src/components/demos/` y `src/layouts/DemoLayout.astro`, con dispatcher en `src/pages/demos/[slug].astro` (detalles en `PLAN-PROYECTO.md` sección 16).
 - F5 en curso (SEO ✅, analytics GA4 preparado en `Layout.astro` con `SITE.analyticsId` vacío en `src/lib/site.ts`; falta ID real, dominio y despliegue).
 - Microanimaciones ya añadidas: scroll progress (`src/scripts/scroll-progress.ts`), marquee (`src/components/Marquee.astro`), float en hero.
 - `PLAN-PROYECTO.md` es la fuente de verdad; actualizar al terminar cada fase.
