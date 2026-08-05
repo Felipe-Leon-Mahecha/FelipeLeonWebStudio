@@ -70,7 +70,7 @@ astro.config.mjs       → site placeholder https://felipeleon.example.com (camb
 ## Estado del proyecto
 
 - F0-F3a completas (estrategia, base, secciones, portafolio + 4 demos, SEO). F4 pulido (build OK, check 0 errores).
-- F3b pendiente (construir los 4 micro-sitios demo reales, guía en `PLAN-PROYECTO.md` sección 15).
+- F3b completada: los 4 micro-sitios demo reales viven en `src/components/demos/` y `src/layouts/DemoLayout.astro`, con dispatcher en `src/pages/demos/[slug].astro` (detalles en `PLAN-PROYECTO.md` sección 16).
 - F5 en curso (SEO ✅, analytics GA4 preparado en `Layout.astro` con `SITE.analyticsId` vacío en `src/lib/site.ts`; falta ID real, dominio y despliegue).
 - Microanimaciones ya añadidas: scroll progress (`src/scripts/scroll-progress.ts`), marquee (`src/components/Marquee.astro`), float en hero.
 - `PLAN-PROYECTO.md` es la fuente de verdad; actualizar al terminar cada fase.

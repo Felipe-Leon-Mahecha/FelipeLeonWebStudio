@@ -42,6 +42,9 @@
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
+  --animate-aurora-1: aurora-move-1 9s ease-in-out infinite;
+  --animate-aurora-2: aurora-move-2 11s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -61,6 +64,72 @@
   }
   50% {
     opacity: 0.45;
+  }
+}
+
+@keyframes aurora-move-1 {
+  0%,
+  100% {
+    transform: translate(-10%, -5%) scale(1);
+  }
+  50% {
+    transform: translate(5%, 3%) scale(1.15);
+  }
+}
+
+@keyframes aurora-move-2 {
+  0%,
+  100% {
+    transform: translate(8%, 2%) scale(1.1);
+  }
+  50% {
+    transform: translate(-6%, -4%) scale(0.95);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  12% {
+    transform: translate3d(38vw, 16vw, 0);
+    opacity: 1;
+  }
+  16% {
+    transform: translate3d(42vw, 18vw, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(42vw, 18vw, 0);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  animation: shoot 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-1,
+  .animate-aurora-2,
+  .animate-twinkle,
+  .shooting-star {
+    animation: none !important;
+    opacity: 0.3;
   }
 }
 
