@@ -1,0 +1,203 @@
+---
+import DemoStrip from './DemoStrip.astro';
+import DemoHeader from './DemoHeader.astro';
+import DemoHero from './DemoHero.astro';
+import DemoFooter from './DemoFooter.astro';
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const accent = '#2a9d8f';
+const base = '#f1f8f9';
+const surface = '#ffffff';
+const emergency = '#e63946';
+
+const services = [
+  { icon: 'lucide:stethoscope', name: 'Consulta general', price: '$45.000', desc: 'Revisión completa y plan de salud.' },
+  { icon: 'lucide:syringe', name: 'Vacunación', price: '$35.000', desc: 'Esquema completo para perros y gatos.', hot: true },
+  { icon: 'lucide:scissors', name: 'Peluquería canina y felina', price: '$50.000', desc: 'Baño, corte y corte de uñas incluidos.' },
+  { icon: 'lucide:activity', name: 'Cirugía menor', price: 'desde $300.000', desc: 'Esterilización y cirugías de tejidos.' },
+  { icon: 'lucide:phone', name: 'Urgencias 24/7', price: 'atención inmediata', desc: 'Llega cuando tu mascota más te necesita.' },
+  { icon: 'lucide:flask-conical', name: 'Laboratorio clínico', price: '$25.000', desc: 'Exámenes de sangre, orina y coprológicos.' },
+];
+
+const team = [
+  { name: 'Carolina Mesa', role: 'Médica veterinaria · UdeA', tag: '12 años cuidando mascotas' },
+  { name: 'Jorge Beltrán', role: 'Cirujano veterinario', tag: 'Cirugías y urgencias' },
+  { name: 'Paula Osorio', role: 'Especialista en piel', tag: 'Dermatología y alergias' },
+];
+
+const hours = [
+  ['Lunes a viernes', '8:00 am – 7:00 pm'],
+  ['Sábado', '8:00 am – 6:00 pm'],
+  ['Urgencias', '24 horas, todos los días'],
+];
+
+const wa = whatsappLink('Hola, quiero agendar una consulta en Patitas y Más para mi mascota. ¿Me cuentan disponibilidad?');
+const waUrgencia = whatsappLink('Hola, tengo una urgencia con mi mascota. ¿Están disponibles?');
+---
+
+<DemoStrip slug="veterinaria" brand="Patitas y Más" />
+<DemoHeader
+  brand="Patitas y Más"
+  accent={accent}
+  links={[
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Equipo', href: '#equipo' },
+    { label: 'Horarios', href: '#horarios' },
+  ]}
+  ctaText="Agendar consulta"
+  ctaHref={wa}
+  light
+/>
+
+<a
+  href={waUrgencia}
+  target="_blank"
+  rel="noopener"
+  class="block border-b"
+  style={`background:${emergency}; border-color:${emergency}`}
+>
+  <div class="shell flex items-center justify-center gap-3 py-3 text-center">
+    <Icon name="lucide:phone-call" width={18} height={18} class="h-4.5 w-4.5 shrink-0 text-white" />
+    <span class="text-sm font-semibold text-white">
+      ¿Urgencia con tu mascota? Estamos 24/7 — toca aquí para escribirnos
+    </span>
+  </div>
+</a>
+
+<main style={`background:${base}`}>
+  <DemoHero
+    badge="Clínica veterinaria · Laureles"
+    titleA="Cuidamos a tu mascota"
+    titleB="como de la familia."
+    tagline="Consulta, vacunación, peluquería y urgencias con médicos veterinarios de verdad. Agenda por WhatsApp y te respondemos rápido."
+    accent={accent}
+    palette={['#f1f8f9', '#cfe9ec']}
+    ctaText="Agendar consulta"
+    ctaHref={wa}
+    secondaryText="Ver servicios"
+    secondaryHref="#servicios"
+    meta={['Veterinarios de oficio', 'Urgencias 24/7', 'Seguimiento por WhatsApp']}
+  />
+
+  <section id="servicios" class="py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Servicios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Salud y bienestar en un solo lugar</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(42,157,143,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(42,157,143,0.12)]"
+            style={`background:${surface}`}
+          >
+            {s.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                style={`background:${accent}`}
+              >
+                Más pedido
+              </span>
+            )}
+            <Icon
+              name={s.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{s.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{s.desc}</p>
+            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+              {s.price}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Nuestro equipo
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Médicos con vocación</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-3">
+        {team.map((m) => (
+          <div class="flex flex-col items-center rounded-2xl border border-[#141414]/10 p-8 text-center" style={`background:${surface}`}>
+            <div
+              class="flex h-20 w-20 items-center justify-center rounded-full font-display text-2xl font-bold text-white"
+              style={`background:linear-gradient(135deg,${accent},#1b6a60)`}
+            >
+              {m.name.split(' ').map((w) => w[0]).join('')}
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{m.name}</h3>
+            <p class="mt-1 font-mono text-xs tracking-widest uppercase" style={`color:${accent}`}>
+              {m.role}
+            </p>
+            <p class="mt-3 text-sm text-[#141414]/55">{m.tag}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="pb-24">
+    <div class="shell grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+          <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+        </div>
+        <ul class="mt-6 space-y-3">
+          {hours.map(([d, h]) => (
+            <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
+              <span class="text-[#141414]/60">{d}</span>
+              <span class="font-mono text-[#141414]">{h}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
+          </div>
+          <p class="mt-6 text-[#141414]/60">
+            Calle 32 # 74-18, Laureles, Medellín.
+            <br />
+            Parqueadero de mascotas disponible y entrega de medicamentos con tu pedido.
+          </p>
+        </div>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={`background:${accent}`}
+        >
+          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+          Agendar consulta
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<DemoFooter
+  brand="Patitas y Más"
+  accent={accent}
+  ctaText="Agenda la consulta de tu mascota"
+  message="Hola, quiero agendar una consulta en Patitas y Más para mi mascota. ¿Me cuentan disponibilidad?"
+/>

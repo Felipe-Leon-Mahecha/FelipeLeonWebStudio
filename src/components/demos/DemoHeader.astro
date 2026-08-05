@@ -1,0 +1,46 @@
+---
+import Gem from '../ui/Gem.astro';
+
+interface Props {
+  brand: string;
+  accent: string;
+  links: { label: string; href: string }[];
+  ctaText: string;
+  ctaHref: string;
+  light?: boolean;
+}
+
+const { brand, accent, links, ctaText, ctaHref, light = false } = Astro.props;
+const text = light ? 'text-[#141414]' : 'text-white';
+const textSoft = light ? 'text-[#141414]/60' : 'text-white/60';
+const bg = light ? 'bg-white/70' : 'bg-[#0a0a0a]/70';
+const border = light ? 'border-[#141414]/10' : 'border-white/10';
+---
+
+<header class={`sticky top-11 z-40 border-b backdrop-blur ${bg} ${border}`}>
+  <div class="shell flex h-16 items-center justify-between gap-4">
+    <a href="#inicio" class={`flex items-center gap-2.5 font-display text-lg font-bold ${text}`}>
+      <Gem width={22} height={22} class="h-5 w-5" />
+      {brand}
+    </a>
+
+    <nav class="hidden items-center gap-7 md:flex" style={`--accent:${accent}`}>
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class={`text-sm font-medium transition-colors ${textSoft} hover:text-[var(--accent)]`}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+
+    <a
+      href={ctaHref}
+      class="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+      style={`background:${accent}`}
+    >
+      {ctaText}
+    </a>
+  </div>
+</header>

@@ -1,0 +1,222 @@
+---
+import DemoStrip from './DemoStrip.astro';
+import DemoHeader from './DemoHeader.astro';
+import DemoHero from './DemoHero.astro';
+import DemoFooter from './DemoFooter.astro';
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const accent = '#d4a24e';
+const base = '#0e0e11';
+const surface = '#16161b';
+
+const services = [
+  { icon: 'lucide:scissors', name: 'Corte clásico', price: '$30.000', desc: 'Tijera, máquina y acabado con navaja.' },
+  { icon: 'lucide:crown', name: 'Corte + barba', price: '$45.000', desc: 'El combo más pedido de la casa.', hot: true },
+  { icon: 'lucide:flame', name: 'Barba y perfilado', price: '$20.000', desc: 'Navaja, toalla caliente y aceite.' },
+  { icon: 'lucide:sparkles', name: 'Afeitado clásico', price: '$25.000', desc: 'Toalla caliente y cera, estilo tradicional.' },
+  { icon: 'lucide:zap', name: 'Diseño y detalle', price: '$10.000', desc: 'Líneas, degradados y acabados finos.' },
+  { icon: 'lucide:gem', name: 'Pelo largo o rizado', price: '$35.000', desc: 'Corte con secado y definición natural.' },
+];
+
+const barbers = [
+  { name: 'Miguel Ángel', role: 'Barber master · 12 años', tag: 'Cortes clásicos y degradados' },
+  { name: 'Sebastián Rojas', role: 'Especialista en barba', tag: 'Navaja y toalla caliente' },
+  { name: 'Camilo Torres', role: 'Estilista moderno', tag: 'Fades y tendencias' },
+];
+
+const gallery = [
+  { icon: 'lucide:scissors', label: 'Cortes de autor', grad: 'linear-gradient(135deg,#3a3a44,#1c1c22)' },
+  { icon: 'lucide:flame', label: 'Barba y navaja', grad: 'linear-gradient(135deg,#d4a24e,#7a5a22)' },
+  { icon: 'lucide:zap', label: 'Degradados', grad: 'linear-gradient(135deg,#26262e,#101014)' },
+  { icon: 'lucide:gem', label: 'Estilo clásico', grad: 'linear-gradient(135deg,#b8893a,#5c4217)' },
+];
+
+const hours = [
+  ['Lunes a viernes', '9:00 am – 8:00 pm'],
+  ['Sábado', '9:00 am – 6:00 pm'],
+  ['Domingo', 'Cerrado'],
+];
+
+const wa = whatsappLink('Hola, quiero reservar un turno en Navaja Club. ¿Me cuentan disponibilidad?');
+---
+
+<DemoStrip slug="barberia" brand="Navaja Club" />
+<DemoHeader
+  brand="Navaja Club"
+  accent={accent}
+  links={[
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Galería', href: '#galeria' },
+    { label: 'Barberos', href: '#barberos' },
+    { label: 'Horarios', href: '#horarios' },
+  ]}
+  ctaText="Reservar por WhatsApp"
+  ctaHref={wa}
+/>
+
+<main style={`background:${base}`}>
+  <DemoHero
+    badge="Barbería · Centro histórico"
+    titleA="Tu corte, tu estilo,"
+    titleB="sin esperas."
+    tagline="Cortes, barba y afeitado clásico con barberos de oficio. Reserva por WhatsApp y llega: te atendemos puntual."
+    accent={accent}
+    palette={['#0e0e11', '#23232b']}
+    ctaText="Reservar por WhatsApp"
+    ctaHref={wa}
+    secondaryText="Ver servicios"
+    secondaryHref="#servicios"
+    meta={['Solo con cita', 'Café incluido', 'Puntualidad garantizada']}
+    dark
+  />
+
+  <section id="servicios" class="py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Carta de servicios
+        </span>
+        <h2 class="display mt-3 text-3xl text-white sm:text-5xl">Cortes y barba con precio claro</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-white/10 p-7 transition-all duration-300 hover:-translate-y-1"
+            style={`background:${surface}`}
+          >
+            {s.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider"
+                style={`background:${accent}; color:${base}`}
+              >
+                Más pedido
+              </span>
+            )}
+            <Icon
+              name={s.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-xl font-bold text-white">{s.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-white/55">{s.desc}</p>
+            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+              {s.price}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Galería
+        </span>
+        <h2 class="display mt-3 text-3xl text-white sm:text-5xl">El oficio se ve en el detalle</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {gallery.map((g) => (
+          <div
+            class="relative flex aspect-square items-end overflow-hidden rounded-2xl border border-white/10 p-6 transition-transform duration-300 hover:-translate-y-1"
+            style={`background:${g.grad}`}
+          >
+            <Icon
+              name={g.icon}
+              width={44}
+              height={44}
+              class="absolute top-6 left-6 h-11 w-11 opacity-60"
+            />
+            <p class="font-display text-lg font-bold text-white">{g.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="barberos" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          El equipo
+        </span>
+        <h2 class="display mt-3 text-3xl text-white sm:text-5xl">Barberos de oficio, no aprendices</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-3">
+        {barbers.map((b) => (
+          <div class="flex flex-col items-center rounded-2xl border border-white/10 p-8 text-center" style={`background:${surface}`}>
+            <div
+              class="flex h-20 w-20 items-center justify-center rounded-full font-display text-2xl font-bold"
+              style={`background:linear-gradient(135deg,${accent},#7a5a22); color:${base}`}
+            >
+              {b.name.split(' ').map((w) => w[0]).join('')}
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-white">{b.name}</h3>
+            <p class="mt-1 font-mono text-xs tracking-widest uppercase" style={`color:${accent}`}>
+              {b.role}
+            </p>
+            <p class="mt-3 text-sm text-white/55">{b.tag}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="pb-24">
+    <div class="shell grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border border-white/10 p-8" style={`background:${surface}`}>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+          <h3 class="font-display text-2xl font-bold text-white">Horarios</h3>
+        </div>
+        <ul class="mt-6 space-y-3">
+          {hours.map(([d, h]) => (
+            <li class="flex items-center justify-between border-b border-white/5 pb-3 text-sm">
+              <span class="text-white/60">{d}</span>
+              <span class="font-mono text-white">{h}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col justify-between rounded-2xl border border-white/10 p-8" style={`background:${surface}`}>
+        <div>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-white">Ubicación</h3>
+          </div>
+          <p class="mt-6 text-white/60">
+            Cra 70 # 7-14, Medellín.
+            <br />
+            A 2 cuadras del parque. Parqueadero en la puerta.
+          </p>
+        </div>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={`background:${accent}`}
+        >
+          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+          Reservar turno
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<DemoFooter
+  brand="Navaja Club"
+  accent={accent}
+  ctaText="Agenda tu turno hoy"
+  message="Hola, quiero reservar un turno en Navaja Club. ¿Me cuentan disponibilidad?"
+/>

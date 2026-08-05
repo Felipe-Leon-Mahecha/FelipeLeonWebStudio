@@ -1,0 +1,229 @@
+---
+import DemoStrip from './DemoStrip.astro';
+import DemoHeader from './DemoHeader.astro';
+import DemoHero from './DemoHero.astro';
+import DemoFooter from './DemoFooter.astro';
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+import { whatsappLink } from '../../lib/site';
+import { Icon } from 'astro-icon/components';
+
+const accent = '#d24a7d';
+const base = '#fdf4f7';
+const surface = '#ffffff';
+
+const services = [
+  { icon: 'lucide:scissors', name: 'Corte y peinado', price: '$45.000', desc: 'Asesoría de estilo y acabado perfecto.' },
+  { icon: 'lucide:sparkles', name: 'Color + baño de crema', price: '$120.000', desc: 'Color, mechas y baño de crema incluido.', hot: true },
+  { icon: 'lucide:hand', name: 'Manicure en gel', price: '$45.000', desc: 'Esmaltado en gel con cutícula perfecta.' },
+  { icon: 'lucide:leaf', name: 'Tratamiento capilar', price: '$70.000', desc: 'Nutrición profunda con productos premium.' },
+  { icon: 'lucide:calendar', name: 'Peinado para eventos', price: '$60.000', desc: 'Recogidos, ondas y moños de fiesta.' },
+  { icon: 'lucide:smile', name: 'Maquillaje social', price: '$90.000', desc: 'Maquillaje para grado, boda o sesión.' },
+];
+
+const gallery = [
+  { icon: 'lucide:scissors', label: 'Cortes', grad: 'linear-gradient(135deg,#f9dbe6,#f0cdd8)' },
+  { icon: 'lucide:sparkles', label: 'Color', grad: 'linear-gradient(135deg,#e8a6c2,#d24a7d)' },
+  { icon: 'lucide:hand', label: 'Manicure', grad: 'linear-gradient(135deg,#f6c8d8,#f2e2e8)' },
+  { icon: 'lucide:smile', label: 'Maquillaje', grad: 'linear-gradient(135deg,#d24a7d,#8f2f57)' },
+];
+
+const testimonials = [
+  {
+    text: 'Salí sintiéndome otra. El color quedó exacto como lo soñé.',
+    name: 'Valentina P.',
+    tag: 'Clienta desde 2023',
+  },
+  {
+    text: 'Me arreglaron para mi grado y no pararon de felicitarme.',
+    name: 'Laura M.',
+    tag: 'Peinado y maquillaje',
+  },
+  {
+    text: 'Atención increíble y precios justos. Ya es mi cita semanal.',
+    name: 'Andrea C.',
+    tag: 'Manicure y corte',
+  },
+];
+
+const hours = [
+  ['Lunes a viernes', '9:00 am – 7:00 pm'],
+  ['Sábado', '9:00 am – 7:00 pm'],
+  ['Domingo', '10:00 am – 3:00 pm (citas)'],
+];
+
+const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuentan disponibilidad?');
+---
+
+<DemoStrip slug="boutique" brand="Glow Studio" />
+<DemoHeader
+  brand="Glow Studio"
+  accent={accent}
+  links={[
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Estilos', href: '#estilos' },
+    { label: 'Testimonios', href: '#testimonios' },
+    { label: 'Horarios', href: '#horarios' },
+  ]}
+  ctaText="Agendar cita"
+  ctaHref={wa}
+  light
+/>
+
+<main style={`background:${base}`}>
+  <DemoHero
+    badge="Salón de belleza · Chapinero"
+    titleA="Belleza que realza"
+    titleB="lo que eres."
+    tagline="Corte, color y tratamientos con productos premium. Agenda tu cita en minutos por WhatsApp y llega lista para brillar."
+    accent={accent}
+    palette={['#fdf4f7', '#f0cdd8']}
+    ctaText="Agendar cita"
+    ctaHref={wa}
+    secondaryText="Ver servicios"
+    secondaryHref="#servicios"
+    meta={['Marcas premium', 'Color certificado', 'Agenda fácil']}
+  />
+
+  <section id="servicios" class="py-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Servicios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Mimos que se notan</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <div
+            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(210,74,125,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(210,74,125,0.14)]"
+            style={`background:${surface}`}
+          >
+            {s.hot && (
+              <span
+                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                style={`background:${accent}`}
+              >
+                Más pedido
+              </span>
+            )}
+            <Icon
+              name={s.icon}
+              width={28}
+              height={28}
+              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+              style={`color:${accent}`}
+            />
+            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{s.name}</h3>
+            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{s.desc}</p>
+            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+              {s.price}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="estilos" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Galería de estilos
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Ideas para tu próxima cita</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {gallery.map((g) => (
+          <div
+            class="relative flex aspect-square items-end overflow-hidden rounded-2xl border border-[#141414]/10 p-6 transition-transform duration-300 hover:-translate-y-1"
+            style={`background:${g.grad}`}
+          >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <Icon name={g.icon} width={44} height={44} class="absolute top-6 left-6 h-11 w-11 text-white/80" />
+            <p class="relative font-display text-lg font-bold text-white">{g.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios" class="pb-24">
+    <div class="shell">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Testimonios
+        </span>
+        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Clientas que vuelven</h2>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <div class="flex flex-col rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
+            <div class="flex gap-1">
+              {[0, 1, 2, 3, 4].map(() => (
+                <Icon name="lucide:star" width={16} height={16} class="h-4 w-4 fill-current" style={`color:${accent}`} />
+              ))}
+            </div>
+            <p class="mt-5 flex-1 leading-relaxed text-[#141414]/75">“{t.text}”</p>
+            <p class="mt-6">
+              <span class="font-display font-bold text-[#141414]">{t.name}</span>
+              <span class="mt-0.5 block text-sm text-[#141414]/50">{t.tag}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="pb-24">
+    <div class="shell grid gap-5 lg:grid-cols-2">
+      <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+          <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+        </div>
+        <ul class="mt-6 space-y-3">
+          {hours.map(([d, h]) => (
+            <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
+              <span class="text-[#141414]/60">{d}</span>
+              <span class="font-mono text-[#141414]">{h}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+        <div>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
+          </div>
+          <p class="mt-6 text-[#141414]/60">
+            Cra 13 # 84-12, Chapinero, Bogotá.
+            <br />
+            A 1 cuadra de la estación. Ambiente tranquilo y café de bienvenida.
+          </p>
+        </div>
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={`background:${accent}`}
+        >
+          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+          Agendar cita
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<DemoFooter
+  brand="Glow Studio"
+  accent={accent}
+  ctaText="Agenda tu cita hoy"
+  message="Hola, quiero agendar una cita en Glow Studio. ¿Me cuentan disponibilidad?"
+/>

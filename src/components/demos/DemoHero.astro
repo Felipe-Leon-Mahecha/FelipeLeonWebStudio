@@ -1,0 +1,113 @@
+---
+import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
+
+interface Props {
+  badge: string;
+  titleA: string;
+  titleB: string;
+  tagline: string;
+  accent: string;
+  palette: string[];
+  ctaText: string;
+  ctaHref: string;
+  secondaryText: string;
+  secondaryHref: string;
+  meta: string[];
+  dark?: boolean;
+}
+
+const {
+  badge,
+  titleA,
+  titleB,
+  tagline,
+  accent,
+  palette,
+  ctaText,
+  ctaHref,
+  secondaryText,
+  secondaryHref,
+  meta,
+  dark = false,
+} = Astro.props;
+
+const text = dark ? 'text-white' : 'text-[#141414]';
+const textSoft = dark ? 'text-white/70' : 'text-[#141414]/65';
+const secondary = dark
+  ? 'border-white/40 text-white hover:border-white hover:bg-white/10'
+  : 'border-[#141414]/25 text-[#141414] hover:border-[#141414] hover:bg-[#141414]/5';
+---
+
+<section
+  id="inicio"
+  class="relative overflow-hidden"
+  style={`background: linear-gradient(160deg, ${palette[0]} 0%, ${palette[1]} 100%)`}
+>
+  <div
+    class="bg-grid absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute -top-32 right-0 h-96 w-96 rounded-full blur-[120px]"
+    style={`background:${accent}; opacity:0.25`}
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute -bottom-40 -left-20 h-80 w-80 rounded-full blur-[110px]"
+    style={`background:${accent}; opacity:0.15`}
+    aria-hidden="true"
+  ></div>
+
+  <div class="shell relative flex min-h-[78svh] flex-col items-center justify-center pt-40 pb-24 text-center">
+    <span
+      class="rounded-full border px-4 py-1.5 font-mono text-xs font-medium tracking-[0.25em] uppercase"
+      style={`border-color:${accent}40; color:${accent}`}
+    >
+      {badge}
+    </span>
+
+    <h1 class={`display mt-6 max-w-4xl text-4xl leading-[1.05] sm:text-6xl lg:text-7xl ${text}`}>
+      {titleA}{' '}
+      <span class="relative inline-block" style={`color:${accent}`}>
+        {titleB}
+        <span
+          class="absolute -bottom-1 left-0 h-1.5 w-full rounded-full"
+          style={`background:${accent}; opacity:0.35`}
+          aria-hidden="true"
+        ></span>
+      </span>
+    </h1>
+
+    <p class={`mt-5 max-w-xl text-lg leading-relaxed ${textSoft}`}>{tagline}</p>
+
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <a
+        href={ctaHref}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-semibold text-white shadow-xl transition-transform hover:-translate-y-0.5"
+        style={`background:${accent}`}
+      >
+        <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+        {ctaText}
+      </a>
+      <a
+        href={secondaryHref}
+        class={`inline-flex items-center justify-center rounded-full border px-7 py-3.5 font-semibold transition-colors ${secondary}`}
+      >
+        {secondaryText}
+      </a>
+    </div>
+
+    <p
+      class={`mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-mono text-xs tracking-[0.2em] uppercase ${dark ? 'text-white/45' : 'text-[#141414]/45'}`}
+    >
+      {meta.map((m, i) => (
+        <span class="flex items-center gap-4">
+          {i > 0 && <span style={`color:${accent}`}>/</span>}
+          {m}
+        </span>
+      ))}
+    </p>
+  </div>
+</section>
