@@ -173,7 +173,7 @@ barbería ya tiene el 60% hecho.
 | F1 | Proyecto Astro + design system + logo + hero + sobre mí | ✅ Completada |
 | F2 | Servicios, precios, proceso, FAQ, contacto + WhatsApp | ✅ Completada |
 | F3 | Infraestructura demos (collections + Portafolio + 4 archivos + página /demos) | ✅ |
-| F3b | Construir los 4 micro-sitios demo (guía en cada `.md`) | ⏳ SIGUIENTE (otra IA) |
+| F3b | Construir los 4 micro-sitios demo (guía en cada `.md`) | ✅ Completada (ver sección 16) |
 | F4 | Tests + pulido + microanimaciones | ✅ Completada (16/08: check 0, build OK, scroll progress + marquee + float hero) |
 | F5 | SEO completo, analytics, Lighthouse 95+, dominio | ◐ Parcial (robots, og.png, JSON-LD, 404, analytics GA4 configurable listos) |
 | F6 | Lanzamiento + adquisición de clientes | ⏳ |
@@ -264,6 +264,38 @@ El servidor de desarrollo corre en http://localhost:4321
     `G-XXXXXXX` en `src/lib/site.ts` (`analyticsId: 'G-XXXXXXX'`) y re-desplegar.
     ⚠️ Falta: dominio real en `astro.config.mjs` (todavía `https://felipeleon.example.com`).
 
+## 16. FASE 3b COMPLETADA — LOS 4 MICRO-SITIOS DEMO (RESUMEN)
+
+**Qué se construyó (16/08):** las 4 demos dejaron de ser "fichas de caso" y ahora son
+**webs reales completas**, cada una con identidad de marca propia (paleta, acento, estilo):
+
+| Demo | Marca | Estilo | Acento |
+|---|---|---|---|
+| `/demos/barberia` | Navaja Club | Oscuro + dorado, masculino | `#d4a24e` |
+| `/demos/boutique` | Glow Studio | Rosa suave, femenino premium | `#d24a7d` |
+| `/demos/mercados` | Mercado Rodante | Crema + verde, de barrio confiable | `#2f9e44` |
+| `/demos/veterinaria` | Patitas y Más | Azul claro + teal, limpio y calmado | `#2a9d8f` |
+
+**Arquitectura:**
+- `src/layouts/DemoLayout.astro` → HTML propio (head SEO, sin header/footer de Felipe;
+  cada demo es un sitio independiente). Importa `global.css` para reusar `.shell`,
+  `.display`, `.bg-grid`.
+- `src/components/demos/` → chrome compartido (DemoStrip con aspecto de navegador +
+  botón "Quiero una página como esta" a WhatsApp; DemoHeader sticky; DemoHero;
+  DemoFooter con CTA final) + 4 componentes de demo (BarberiaDemo, BoutiqueDemo,
+  MercadosDemo, VeterinariaDemo) con secciones propias.
+- `src/pages/demos/[slug].astro` → dispatcher: según `slug` renderiza la demo correcta.
+- Cada demo incluye: hero, servicios con precios COP, galería/equipo/testimonios,
+  horarios y ubicación, banner de urgencias (veterinaria), ruta semanal + cómo pedir
+  (mercados). Sin fotos reales: se usan tiles con gradientes e íconos lucide.
+- **Conversión:** la barrita superior (DemoStrip) y el CTA final de cada demo llevan a
+  WhatsApp de Felipe con mensaje personalizado por industria.
+- ⚠️ Los textos de las marcas demo son **contenido ficticio de muestra** (para mostrar
+  el trabajo); los precios COP son realistas. No usar estos datos de contacto reales.
+
+**Verificado:** `npx astro check` = 0 errores/warnings/hints. Build = 6 páginas OK.
+Las demos se ven en http://localhost:4321/demos/{barberia|boutique|mercados|veterinaria}.
+
 ## 14. INSTRUCCIONES PARA LA IA QUE CONTINÚE
 
 - **Leer este archivo completo antes de tocar nada.**
@@ -283,7 +315,10 @@ El servidor de desarrollo corre en http://localhost:4321
 - Mantener este archivo SIEMPRE actualizado: es lo que permite retomar el trabajo
   desde otra sesión de IA sin perder contexto.
 
-## 15. INSTRUCCIONES PARA LA IA QUE CONSTRUYA LAS DEMOS (FASE 3b)
+## 15. INSTRUCCIONES PARA LA IA QUE CONSTRUYA LAS DEMOS (FASE 3b) — ✅ YA COMPLETADA
+
+> ⚠️ **Esta fase YA se completó (16/08).** Los 4 micro-sitios están construidos (ver
+> sección 16). NO reconstruir. Conservar esta sección solo como referencia histórica.
 
 **Objetivo:** convertir las 4 demos del portafolio en micro-sitios web reales, cada uno
 con su propia página, usando la guía Markdown dentro de cada
