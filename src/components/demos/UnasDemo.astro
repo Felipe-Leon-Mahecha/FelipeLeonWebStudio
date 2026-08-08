@@ -63,198 +63,577 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuent
   showLogoPlaceholder={true}
 />
 
-<main style={`background:${base}`}>
-  <DemoHero
-    badge="Estudio de uñas · Centro"
-    titleA="Uñas perfectas,"
-    titleB="manos y pies cuidados."
-    tagline="Manicure, pedicure y tratamiento de pies y manos con productos profesionales. Agenda tu cita en minutos por WhatsApp."
-    accent={accent}
-    palette={['#fdf5f3', '#f2dde2']}
-    ctaText="Agendar cita"
-    ctaHref={wa}
-    secondaryText="Ver servicios"
-    secondaryHref="#servicios"
-    meta={['Productos profesionales', 'Agenda fácil', 'Precios claros']}
-    editableTitle
-  />
-
-  <section id="servicios" class="py-24">
-    <div class="shell">
-      <div class="max-w-2xl">
-        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
-          Servicios
-        </span>
-        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Cuidado para uñas, pies y manos</h2>
-      </div>
-
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s) => (
-          <div
-            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(178,55,106,0.14)]"
-            style={`background:${surface}`}
+<main style={`background:${base}`} data-tabs-container data-whatsapp-phone="573104885609">
+  <div class="sticky top-[108px] z-30 border-b backdrop-blur" style={`background:color-mix(in srgb,${surface} 92%,transparent); border-color:rgba(20,20,20,0.06)`}>
+    <div class="shell py-4">
+      <div
+        role="tablist"
+        aria-label="Navegación principal"
+        class="demo-tabs-list inline-flex w-full max-w-xl flex-wrap items-center gap-1 rounded-full border p-1"
+        style="border-color:rgba(20,20,20,0.08); background:rgba(20,20,20,0.025)"
+      >
+        {[
+          { id: 'inicio', label: 'Inicio', icon: 'lucide:home' },
+          { id: 'catalogo', label: 'Catálogo', icon: 'lucide:layout-grid' },
+          { id: 'reservas', label: 'Reservas', icon: 'lucide:calendar-plus' },
+          { id: 'panel', label: 'Panel', icon: 'lucide:layout-dashboard' },
+        ].map((t) => (
+          <button
+            type="button"
+            role="tab"
+            data-tab-btn={t.id}
+            id={`demo-tab-${t.id}`}
+            aria-selected={t.id === 'inicio' ? 'true' : 'false'}
+            aria-controls={`demo-panel-${t.id}`}
+            tabindex={t.id === 'inicio' ? 0 : -1}
+            class="demo-tab-btn group inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-300"
           >
-            {s.hot && (
-              <span
-                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
-                style={`background:${accent}`}
-              >
-                Más pedido
-              </span>
-            )}
-            <Icon
-              name={s.icon}
-              width={28}
-              height={28}
-              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
-              style={`color:${accent}`}
-            />
-            <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{s.name}</h3>
-            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{s.desc}</p>
-            <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
-              {s.price}
-            </p>
-          </div>
+            <Icon name={t.icon} width={16} height={16} class="h-4 w-4 shrink-0" />
+            <span>{t.label}</span>
+          </button>
         ))}
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="tienda" class="pb-24">
-    <div class="shell">
-      <div class="max-w-2xl">
-        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
-          Mini-tienda
-        </span>
-        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Llévate el cuidado a casa</h2>
-        <p class="mt-5 text-[#141414]/60">
-          Productos que usamos en el estudio, listos para comprar por WhatsApp.
-        </p>
-      </div>
+  <div data-tab-panel="inicio" id="demo-panel-inicio" role="tabpanel" aria-labelledby="demo-tab-inicio" class="demo-tab-panel is-open">
+    <DemoHero
+      badge="Estudio de uñas · Centro"
+      titleA="Uñas perfectas,"
+      titleB="manos y pies cuidados."
+      tagline="Manicure, pedicure y tratamiento de pies y manos con productos profesionales. Agenda tu cita en minutos por WhatsApp."
+      accent={accent}
+      palette={['#fdf5f3', '#f2dde2']}
+      ctaText="Agendar cita"
+      ctaHref="#tab=reservas"
+      secondaryText="Ver servicios"
+      secondaryHref="#tab=catalogo"
+      meta={['Productos profesionales', 'Agenda fácil', 'Precios claros']}
+      editableTitle
+    />
 
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((p) => (
-          <div
-            class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.05)] transition-all duration-300 hover:-translate-y-1"
-            style={`background:${surface}`}
-          >
-            {p.hot && (
-              <span
-                class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
-                style={`background:${accent}`}
-              >
-                Nuevo
-              </span>
-            )}
-            <Icon
-              name={p.icon}
-              width={28}
-              height={28}
-              class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
-              style={`color:${accent}`}
-            />
-            <h3 class="mt-5 font-display text-lg font-bold text-[#141414]">{p.name}</h3>
-            <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{p.desc}</p>
-            <p class="mt-4 flex items-center justify-between gap-3">
-              <span class="font-mono text-lg font-semibold" style={`color:${accent}`}>{p.price}</span>
-              <a
-                href={whatsappLink(`Hola, quiero comprar "${p.name}" en Luna Nails. ¿Está disponible?`)}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-white transition-transform hover:-translate-y-0.5"
-                style={`background:${accent}`}
-              >
-                <WhatsAppIcon width={14} height={14} class="h-3.5 w-3.5" />
-                Pedir
-              </a>
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonios" class="pb-24">
-    <div class="shell">
-      <div class="max-w-2xl">
-        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
-          Testimonios
-        </span>
-        <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Clientas que vuelven</h2>
-      </div>
-
-      <div class="mt-12 grid gap-5 md:grid-cols-3">
-        {testimonials.map((t) => (
-          <div class="flex flex-col rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
-            <div class="flex gap-1">
-              {[0, 1, 2, 3, 4].map(() => (
-                <Icon name="lucide:star" width={16} height={16} class="h-4 w-4 fill-current" style={`color:${accent}`} />
-              ))}
-            </div>
-            <p class="mt-5 flex-1 leading-relaxed text-[#141414]/75">“{t.text}”</p>
-            <p class="mt-6">
-              <span class="font-display font-bold text-[#141414]">{t.name}</span>
-              <span class="mt-0.5 block text-sm text-[#141414]/50">{t.tag}</span>
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="horarios" class="pb-24">
-    <div class="shell grid gap-5 lg:grid-cols-2">
-      <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
-        <div class="flex items-center gap-3">
-          <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
-          <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+    <section id="testimonios" class="pb-24">
+      <div class="shell">
+        <div class="max-w-2xl">
+          <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+            Testimonios
+          </span>
+          <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Clientas que vuelven</h2>
         </div>
-        <ul class="mt-6 space-y-3">
-          {hours.map(([d, h]) => (
-            <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
-              <span class="text-[#141414]/60">{d}</span>
-              <span class="font-mono text-[#141414]">{h}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
 
-      <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
-        <div>
-          <div class="flex items-center gap-3">
-            <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
-            <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
-          </div>
-          <p class="mt-6 text-[#141414]/60">
-            Cra 24 # 56-08, Centro.
-            <br />
-            A 1 cuadra del parque principal. Café y galletas de bienvenida.
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <div class="flex flex-col rounded-2xl border border-[#141414]/10 p-7" style={`background:${surface}`}>
+              <div class="flex gap-1">
+                {[0, 1, 2, 3, 4].map(() => (
+                  <Icon name="lucide:star" width={16} height={16} class="h-4 w-4 fill-current" style={`color:${accent}`} />
+                ))}
+              </div>
+              <p class="mt-5 flex-1 leading-relaxed text-[#141414]/75">“{t.text}”</p>
+              <p class="mt-6">
+                <span class="font-display font-bold text-[#141414]">{t.name}</span>
+                <span class="mt-0.5 block text-sm text-[#141414]/50">{t.tag}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div data-tab-panel="catalogo" id="demo-panel-catalogo" role="tabpanel" aria-labelledby="demo-tab-catalogo" class="demo-tab-panel" hidden>
+    <section id="servicios" class="py-24">
+      <div class="shell">
+        <div class="max-w-2xl">
+          <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+            Servicios
+          </span>
+          <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Cuidado para uñas, pies y manos</h2>
+        </div>
+
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s) => (
+            <div
+              class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(178,55,106,0.14)]"
+              style={`background:${surface}`}
+            >
+              {s.hot && (
+                <span
+                  class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                  style={`background:${accent}`}
+                >
+                  Más pedido
+                </span>
+              )}
+              <Icon
+                name={s.icon}
+                width={28}
+                height={28}
+                class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+                style={`color:${accent}`}
+              />
+              <h3 class="mt-5 font-display text-xl font-bold text-[#141414]">{s.name}</h3>
+              <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{s.desc}</p>
+              <p class="mt-5 font-mono text-lg font-semibold" style={`color:${accent}`}>
+                {s.price}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="tienda" class="pb-24">
+      <div class="shell">
+        <div class="max-w-2xl">
+          <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+            Mini-tienda
+          </span>
+          <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Llévate el cuidado a casa</h2>
+          <p class="mt-5 text-[#141414]/60">
+            Productos que usamos en el estudio, listos para comprar por WhatsApp.
           </p>
         </div>
-        <a
-          href={wa}
-          target="_blank"
-          rel="noopener"
-          class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
-          style={`background:${accent}`}
-        >
-          <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
-          Agendar cita
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <DemoAdminPanelMock
-    brand="Luna Nails"
-    accent={accent}
-    metrics={[
-      { icon: 'lucide:calendar-check', value: '8', label: 'Citas de hoy' },
-      { icon: 'lucide:package', value: '24', label: 'Productos activos' },
-      { icon: 'lucide:star', value: '3', label: 'Reseñas nuevas' },
-    ]}
-  />
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((p) => (
+            <div
+              class="group relative flex flex-col rounded-2xl border border-[#141414]/10 p-7 shadow-[0_8px_30px_rgba(178,55,106,0.05)] transition-all duration-300 hover:-translate-y-1"
+              style={`background:${surface}`}
+            >
+              {p.hot && (
+                <span
+                  class="absolute -top-3 right-5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-white"
+                  style={`background:${accent}`}
+                >
+                  Nuevo
+                </span>
+              )}
+              <Icon
+                name={p.icon}
+                width={28}
+                height={28}
+                class="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
+                style={`color:${accent}`}
+              />
+              <h3 class="mt-5 font-display text-lg font-bold text-[#141414]">{p.name}</h3>
+              <p class="mt-1.5 flex-1 text-sm text-[#141414]/60">{p.desc}</p>
+              <p class="mt-4 flex items-center justify-between gap-3">
+                <span class="font-mono text-lg font-semibold" style={`color:${accent}`}>{p.price}</span>
+                <a
+                  href={whatsappLink(`Hola, quiero comprar "${p.name}" en Luna Nails. ¿Está disponible?`)}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-white transition-transform hover:-translate-y-0.5"
+                  style={`background:${accent}`}
+                >
+                  <WhatsAppIcon width={14} height={14} class="h-3.5 w-3.5" />
+                  Pedir
+                </a>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div data-tab-panel="reservas" id="demo-panel-reservas" role="tabpanel" aria-labelledby="demo-tab-reservas" class="demo-tab-panel" hidden>
+    <section id="reservas" class="py-24">
+      <div class="shell max-w-3xl">
+        <div class="text-center">
+          <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+            Agenda tu cita
+          </span>
+          <h2 class="display mt-4 text-3xl text-[#141414] sm:text-5xl">Reserva en 30 segundos</h2>
+          <p class="mt-5 leading-relaxed text-[#141414]/65">
+            Escoge servicio, fecha y franja. Te confirmamos la cita por WhatsApp.
+          </p>
+        </div>
+
+        <div class="card mt-12 overflow-hidden p-6 sm:p-10" style={`background:${surface}; box-shadow:var(--shadow-card)`}>
+          <form data-reserva-form class="space-y-6" onsubmit="return false;">
+            <div>
+              <label for="reserva-servicio" class="mb-2 block text-sm font-semibold text-[#141414]">
+                Servicio
+              </label>
+              <select
+                id="reserva-servicio"
+                name="servicio"
+                required
+                class="w-full rounded-2xl border border-[#141414]/10 bg-white px-5 py-3.5 text-sm font-medium text-[#141414] outline-none transition-colors focus:border-[color:var(--demo-accent,#b2376a)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--demo-accent,#b2376a)_10%,transparent)]"
+              >
+                <option value="" disabled selected>Selecciona un servicio…</option>
+                {services.map((s) => (
+                  <option value={`${s.name} (${s.price})`}>{s.name} — {s.price}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label for="reserva-fecha" class="mb-2 block text-sm font-semibold text-[#141414]">
+                  Fecha
+                </label>
+                <input
+                  id="reserva-fecha"
+                  name="fecha"
+                  type="date"
+                  required
+                  class="w-full rounded-2xl border border-[#141414]/10 bg-white px-5 py-3.5 text-sm font-medium text-[#141414] outline-none transition-colors focus:border-[color:var(--demo-accent,#b2376a)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--demo-accent,#b2376a)_10%,transparent)]"
+                />
+              </div>
+              <div>
+                <span class="mb-2 block text-sm font-semibold text-[#141414]">Franja horaria</span>
+                <div role="radiogroup" aria-label="Franja horaria" class="grid grid-cols-3 gap-2.5">
+                  {[
+                    { v: 'Mañana (9:00 – 12:30)', label: 'Mañana', icon: 'lucide:sun' },
+                    { v: 'Tarde (2:00 – 5:30)', label: 'Tarde', icon: 'lucide:cloud-sun' },
+                    { v: 'Cupo especial', label: 'Especial', icon: 'lucide:sparkles' },
+                  ].map((f, i) => (
+                    <label
+                      class={`demo-franja flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-2xl border p-3.5 text-center transition-all ${
+                        i === 0
+                          ? 'demo-franja-checked border-transparent text-white'
+                          : 'border-[#141414]/10 text-[#141414]/70 hover:border-[color:color-mix(in_srgb,var(--demo-accent,#b2376a)_30%,transparent)]'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="franja"
+                        value={f.v}
+                        class="sr-only"
+                        checked={i === 0}
+                      />
+                      <Icon name={f.icon} width={16} height={16} class="h-4 w-4" />
+                      <span class="text-xs font-bold">{f.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="reserva-nombre" class="mb-2 block text-sm font-semibold text-[#141414]">
+                Tu nombre
+              </label>
+              <input
+                id="reserva-nombre"
+                name="nombre"
+                type="text"
+                placeholder="¿Cómo te llamamos?"
+                autocomplete="name"
+                required
+                class="w-full rounded-2xl border border-[#141414]/10 bg-white px-5 py-3.5 text-sm font-medium text-[#141414] placeholder:text-[#141414]/35 outline-none transition-colors focus:border-[color:var(--demo-accent,#b2376a)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--demo-accent,#b2376a)_10%,transparent)]"
+              />
+            </div>
+
+            <button
+              type="submit"
+              data-reserva-submit
+              class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5"
+              style="background:var(--demo-accent,#b2376a)"
+            >
+              <WhatsAppIcon width={20} height={20} class="h-5 w-5" />
+              Confirmar por WhatsApp
+            </button>
+            <p class="text-center text-xs text-[#141414]/50">
+              Al dar clic se abre WhatsApp con todos los datos listos para enviar.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div data-tab-panel="panel" id="demo-panel-panel" role="tabpanel" aria-labelledby="demo-tab-panel" class="demo-tab-panel" hidden>
+    <section id="horarios" class="pt-24">
+      <div class="shell grid gap-5 lg:grid-cols-2">
+        <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+          <div class="flex items-center gap-3">
+            <Icon name="lucide:clock" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+            <h3 class="font-display text-2xl font-bold text-[#141414]">Horarios</h3>
+          </div>
+          <ul class="mt-6 space-y-3">
+            {hours.map(([d, h]) => (
+              <li class="flex items-center justify-between border-b border-[#141414]/5 pb-3 text-sm">
+                <span class="text-[#141414]/60">{d}</span>
+                <span class="font-mono text-[#141414]">{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
+          <div>
+            <div class="flex items-center gap-3">
+              <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
+              <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
+            </div>
+            <p class="mt-6 text-[#141414]/60">
+              Cra 24 # 56-08, Centro.
+              <br />
+              A 1 cuadra del parque principal. Café y galletas de bienvenida.
+            </p>
+          </div>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener"
+            class="mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5"
+            style={`background:${accent}`}
+          >
+            <WhatsAppIcon width={18} height={18} class="h-4.5 w-4.5" />
+            Agendar cita
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <DemoAdminPanelMock
+      brand="Luna Nails"
+      accent={accent}
+      metrics={[
+        { icon: 'lucide:calendar-check', value: '8', label: 'Citas de hoy' },
+        { icon: 'lucide:package', value: '24', label: 'Productos activos' },
+        { icon: 'lucide:star', value: '3', label: 'Reseñas nuevas' },
+      ]}
+    />
+  </div>
 </main>
+
+<script>
+  function setupTabs() {
+    var container = document.querySelector('[data-tabs-container]');
+    if (!container) return;
+    var root = document.documentElement;
+
+    var TAB_IDS = ['inicio', 'catalogo', 'reservas', 'panel'];
+    var ANCHOR_MAP: Record<string, { tab: string; scroll: string }> = {
+      '#servicios': { tab: 'catalogo', scroll: '#servicios' },
+      '#tienda': { tab: 'catalogo', scroll: '#tienda' },
+      '#testimonios': { tab: 'inicio', scroll: '#testimonios' },
+      '#horarios': { tab: 'panel', scroll: '#horarios' },
+      '#panel-admin': { tab: 'panel', scroll: '#panel-admin' },
+      '#reservas': { tab: 'reservas', scroll: '#reservas' },
+      '#inicio': { tab: 'inicio', scroll: '#inicio' },
+    };
+
+    var btnEls: Record<string, HTMLElement | null> = {};
+    var panelEls: Record<string, HTMLElement | null> = {};
+    TAB_IDS.forEach(function (id) {
+      btnEls[id] = container!.querySelector('[data-tab-btn="' + id + '"]');
+      panelEls[id] = container!.querySelector('[data-tab-panel="' + id + '"]');
+    });
+
+    function getAccent() {
+      var demoAccent = (root.style.getPropertyValue('--demo-accent') || '').trim();
+      var fromVar = (getComputedStyle(container!).getPropertyValue('--demo-accent') || '').trim() ||
+                    (getComputedStyle(root).getPropertyValue('--demo-accent') || '').trim();
+      return demoAccent || fromVar || '#b2376a';
+    }
+
+    function applyAccentToActive() {
+      var accent = getAccent();
+      TAB_IDS.forEach(function (id) {
+        var btn = btnEls[id];
+        if (btn && btn.getAttribute('aria-selected') === 'true') {
+          btn.style.background = accent;
+          btn.style.color = '#ffffff';
+          btn.style.boxShadow = '0 6px 18px -6px ' + accent + 'cc';
+        } else if (btn) {
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.boxShadow = '';
+        }
+      });
+      var franjaLabels = container!.querySelectorAll<HTMLElement>('.demo-franja-checked');
+      franjaLabels.forEach(function (fl) {
+        fl.style.background = accent;
+        fl.style.borderColor = accent;
+        var ic = fl.querySelector('svg');
+        if (ic) ic.style.color = '#ffffff';
+      });
+    }
+
+    function showTab(id: string, opts?: { scroll?: string }) {
+      opts = opts || {};
+      if (TAB_IDS.indexOf(id) < 0) id = 'inicio';
+      TAB_IDS.forEach(function (tid) {
+        var b = btnEls[tid];
+        var p = panelEls[tid];
+        if (!b || !p) return;
+        if (tid === id) {
+          b.setAttribute('aria-selected', 'true');
+          b.tabIndex = 0;
+          p.hidden = false;
+          p.classList.add('is-open');
+        } else {
+          b.setAttribute('aria-selected', 'false');
+          b.tabIndex = -1;
+          p.hidden = true;
+          p.classList.remove('is-open');
+        }
+      });
+      applyAccentToActive();
+      if (opts.scroll) {
+        requestAnimationFrame(function () {
+          var tgt = document.querySelector(opts.scroll!);
+          if (tgt) {
+            try { tgt.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            catch (e) { tgt.scrollIntoView(); }
+          }
+        });
+      }
+    }
+
+    function hashToState() {
+      var raw = window.location.hash || '';
+      if (!raw) return { tab: 'inicio' as string, scroll: undefined as string | undefined };
+      var m = raw.match(/tab=([a-z]+)/);
+      if (m) {
+        var scrollMatch = raw.match(/[?&]scroll=([^&]+)/);
+        return { tab: m[1], scroll: scrollMatch ? '#' + decodeURIComponent(scrollMatch[1]) : undefined };
+      }
+      var entry = ANCHOR_MAP[raw.split('&')[0].split('?')[0]];
+      if (entry) return { tab: entry.tab, scroll: entry.scroll };
+      return { tab: 'inicio' as const, scroll: undefined };
+    }
+
+    function onHashChange() {
+      var st = hashToState();
+      showTab(st.tab, { scroll: st.scroll });
+    }
+
+    TAB_IDS.forEach(function (id) {
+      var btn = btnEls[id];
+      if (btn) {
+        btn.addEventListener('click', function () {
+          window.location.hash = '#tab=' + id;
+        });
+      }
+    });
+
+    document.querySelectorAll<HTMLAnchorElement>('.demo-header-nav a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href') || '';
+        if (href.indexOf('#tab=') === 0) return;
+        var entry = ANCHOR_MAP[href];
+        if (!entry) return;
+        e.preventDefault();
+        window.location.hash = '#tab=' + entry.tab +
+          (entry.scroll && entry.tab !== 'inicio' ? '&scroll=' + encodeURIComponent(entry.scroll.slice(1)) : '');
+        var current = hashToState();
+        if (current.tab === entry.tab) {
+          requestAnimationFrame(function () {
+            var tgt = document.querySelector(entry.scroll);
+            if (tgt) {
+              try { tgt.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+              catch (err) { tgt.scrollIntoView(); }
+            }
+          });
+        }
+      });
+    });
+
+    var tablist = container!.querySelector('[role="tablist"]');
+    if (tablist) {
+      tablist.addEventListener('keydown', function (ev) {
+        var e = ev as KeyboardEvent;
+        var curr = -1;
+        for (var i = 0; i < TAB_IDS.length; i++) {
+          if (btnEls[TAB_IDS[i]] && document.activeElement === btnEls[TAB_IDS[i]]) {
+            curr = i; break;
+          }
+        }
+        if (curr < 0) return;
+        var next = -1;
+        if (e.key === 'ArrowRight') next = (curr + 1) % TAB_IDS.length;
+        else if (e.key === 'ArrowLeft') next = (curr - 1 + TAB_IDS.length) % TAB_IDS.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = TAB_IDS.length - 1;
+        if (next >= 0) {
+          e.preventDefault();
+          btnEls[TAB_IDS[next]]!.focus();
+          btnEls[TAB_IDS[next]]!.click();
+        }
+      });
+    }
+
+    var submitBtn = container!.querySelector('[data-reserva-submit]');
+    var form = container!.querySelector<HTMLFormElement>('[data-reserva-form]');
+    function updateFranjaStyles() {
+      var accent = getAccent();
+      container!.querySelectorAll<HTMLInputElement>('.demo-franja input[type="radio"]').forEach(function (r) {
+        var label = r.closest<HTMLElement>('.demo-franja');
+        if (!label) return;
+        if (r.checked) {
+          label.classList.add('demo-franja-checked');
+          label.style.background = accent;
+          label.style.borderColor = accent;
+          label.style.color = '#ffffff';
+          var ic = label.querySelector('svg');
+          if (ic) ic.style.color = '#ffffff';
+        } else {
+          label.classList.remove('demo-franja-checked');
+          label.style.background = '';
+          label.style.borderColor = '';
+          label.style.color = '';
+          var ic2 = label.querySelector('svg');
+          if (ic2) ic2.style.color = '';
+        }
+      });
+    }
+    if (form) {
+      form.querySelectorAll<HTMLInputElement>('.demo-franja input[type="radio"]').forEach(function (r) {
+        r.addEventListener('change', updateFranjaStyles);
+      });
+    }
+    if (submitBtn && form) {
+      submitBtn.addEventListener('click', function () {
+        var f = form!;
+        var svc = f.querySelector<HTMLSelectElement>('[name="servicio"]');
+        var fec = f.querySelector<HTMLInputElement>('[name="fecha"]');
+        var nom = f.querySelector<HTMLInputElement>('[name="nombre"]');
+        var fr = f.querySelector<HTMLInputElement>('.demo-franja input[type="radio"]:checked');
+        var msg = [
+          'Hola Luna Nails, quiero confirmar mi cita:',
+          '',
+          '• Nombre: ' + (nom && nom.value ? nom.value : ''),
+          '• Servicio: ' + (svc && svc.value ? svc.value : ''),
+          '• Fecha: ' + (fec && fec.value ? fec.value : ''),
+          '• Franja: ' + (fr && fr.value ? fr.value : ''),
+          '',
+          '¿Me confirman disponibilidad? Gracias.'
+        ].join('\n');
+        var phone = container!.getAttribute('data-whatsapp-phone') || '573104885609';
+        var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    var obs = new MutationObserver(function () {
+      applyAccentToActive();
+      updateFranjaStyles();
+    });
+    obs.observe(root, { attributes: true, attributeFilter: ['style'] });
+
+    applyAccentToActive();
+    updateFranjaStyles();
+    onHashChange();
+    window.addEventListener('hashchange', onHashChange);
+    window.addEventListener('load', function () {
+      applyAccentToActive();
+      updateFranjaStyles();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupTabs);
+  } else {
+    setupTabs();
+  }
+</script>
 
 <DemoFooter
   brand="Luna Nails"

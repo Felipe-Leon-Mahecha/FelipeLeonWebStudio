@@ -132,3 +132,52 @@ const border = light ? 'border-[#141414]/10' : 'border-white/10';
     }
   }
 </style>
+
+<script is:inline>
+  function __demoHeaderSetupTabs() {
+    var tabsContainer = document.querySelector('[data-tabs-container]');
+    if (!tabsContainer) return;
+    var ANCHOR_TO_TAB = {
+      '#servicios': { tab: 'catalogo', scroll: '#servicios' },
+      '#tienda': { tab: 'catalogo', scroll: '#tienda' },
+      '#productos': { tab: 'catalogo', scroll: '#tienda' },
+      '#catalogo': { tab: 'catalogo', scroll: '#servicios' },
+      '#testimonios': { tab: 'inicio', scroll: '#testimonios' },
+      '#horarios': { tab: 'panel', scroll: '#horarios' },
+      '#ubicacion': { tab: 'panel', scroll: '#horarios' },
+      '#panel-admin': { tab: 'panel', scroll: '#panel-admin' },
+      '#reservas': { tab: 'reservas', scroll: '#reservas' },
+      '#agendar': { tab: 'reservas', scroll: '#reservas' },
+      '#inicio': { tab: 'inicio', scroll: '#inicio' },
+    };
+
+    document.querySelectorAll('.demo-header-nav a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href') || '';
+        if (href.indexOf('#tab=') === 0) return;
+        var entry = ANCHOR_TO_TAB[href];
+        if (!entry) return;
+        var currentPanel = tabsContainer.querySelector('[data-tab-panel].is-open');
+        var currentTab = currentPanel ? currentPanel.getAttribute('data-tab-panel') : null;
+        if (currentTab === entry.tab) {
+          e.preventDefault();
+          var tgt = document.querySelector(entry.scroll);
+          if (tgt) {
+            try { tgt.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            catch (e2) { tgt.scrollIntoView(); }
+          }
+        } else {
+          e.preventDefault();
+          window.location.hash = '#tab=' + entry.tab +
+            (entry.scroll && entry.tab !== 'inicio' ? '&scroll=' + encodeURIComponent(entry.scroll.slice(1)) : '');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __demoHeaderSetupTabs);
+  } else {
+    __demoHeaderSetupTabs();
+  }
+</script>
