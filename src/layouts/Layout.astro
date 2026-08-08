@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title = `${SITE.tagline} — ${SITE.name}`, description = SITE.description } = Astro.props;
-const siteUrl = Astro.site?.href ?? 'https://felipeleon.example.com';
+const siteUrl = Astro.site?.href ?? 'https://felipe-leon-web-studio.vercel.app';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
