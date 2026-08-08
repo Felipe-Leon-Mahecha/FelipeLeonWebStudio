@@ -99,6 +99,18 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuen
         <h2 class="display mt-3 text-3xl text-[#141414] sm:text-5xl">Mimos que se notan</h2>
       </div>
 
+      <div
+        class="mt-10 overflow-hidden rounded-2xl border border-[#141414]/10"
+        style="box-shadow:var(--shadow-card)"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80"
+          alt="Interior del salón de belleza con estaciones de trabajo"
+          loading="lazy"
+          class="h-56 w-full object-cover sm:h-72 lg:h-80"
+        />
+      </div>
+
       <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
           <div
@@ -183,6 +195,72 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuen
     </div>
   </section>
 
+  <section id="faq" class="pb-24">
+    <div class="shell max-w-3xl">
+      <div class="text-center">
+        <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+          Preguntas frecuentes
+        </span>
+        <h2 class="display mt-4 text-3xl text-[#141414] sm:text-4xl lg:text-5xl">Dudas antes de agendar</h2>
+        <p class="mt-5 leading-relaxed text-[#141414]/65">
+          Si tu pregunta no está aquí, escríbenos por WhatsApp y te respondemos rápido.
+        </p>
+      </div>
+      <div class="mt-12 space-y-3">
+        {[
+          {
+            q: '¿Necesito pedir cita con anticipación?',
+            a: 'Recomendamos 1-2 días de anticipación para servicios de color y maquillaje social. Cortes y manicura muchas veces tenemos cupo el mismo día. Pregunta sin compromiso por WhatsApp.',
+          },
+          {
+            q: '¿Cuánto dura una cita de color + baño de crema?',
+            a: 'Entre 2 y 3 horas, dependiendo del largo y el tipo de color. Te avisamos el tiempo estimado cuando agendes y tenemos café, revista y Wi‑Fi para que la espera sea agradable.',
+          },
+          {
+            q: '¿Se puede regalar una cita o un servicio?',
+            a: 'Sí. Tenemos bonos regalo de cualquier valor o servicio específico. Se entregan en formato digital por WhatsApp con código personalizado y tienen 3 meses de vigencia.',
+          },
+          {
+            q: '¿Los productos de la tienda se venden sin servicio?',
+            a: 'Claro. Puedes pasar por el salón a comprar shampoo, tratamiento, esmaltes y accesorios sin necesidad de agendar cita. También hacemos envíos por domicilio.',
+          },
+        ].map((f, i) => (
+          <div class="card overflow-hidden" style={`background:${surface}`}>
+            <h3>
+              <button
+                type="button"
+                data-faq-trigger
+                aria-expanded={i === 0 ? 'true' : 'false'}
+                aria-controls={`boutique-faq-panel-${i}`}
+                id={`boutique-faq-trigger-${i}`}
+                class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              >
+                <span class="font-display text-base font-bold text-[#141414] sm:text-lg">{f.q}</span>
+                <Icon
+                  name="lucide:chevron-down"
+                  width={20}
+                  height={20}
+                  class={`faq-chevron h-5 w-5 shrink-0 transition-transform duration-300 ${i === 0 ? 'rotate-180' : ''}`}
+                  style={`color:${accent}`}
+                />
+              </button>
+            </h3>
+            <div
+              id={`boutique-faq-panel-${i}`}
+              role="region"
+              aria-labelledby={`boutique-faq-trigger-${i}`}
+              class={`faq-panel ${i === 0 ? 'open' : ''}`}
+            >
+              <div class="px-6 pb-6">
+                <p class="text-sm leading-relaxed text-[#141414]/65">{f.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section id="horarios" class="pb-24">
     <div class="shell grid gap-5 lg:grid-cols-2">
       <div class="rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
@@ -201,12 +279,21 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuen
       </div>
 
       <div class="flex flex-col justify-between rounded-2xl border border-[#141414]/10 p-8" style={`background:${surface}`}>
-        <div>
+        <div class="flex flex-col gap-6">
           <div class="flex items-center gap-3">
             <Icon name="lucide:map-pin" width={24} height={24} class="h-6 w-6" style={`color:${accent}`} />
             <h3 class="font-display text-2xl font-bold text-[#141414]">Ubicación</h3>
           </div>
-          <p class="mt-6 text-[#141414]/60">
+          <div class="overflow-hidden rounded-2xl border border-[#141414]/10">
+            <iframe
+              title="Mapa de ubicación Glow Studio"
+              src="https://www.google.com/maps?q=Carrera+13+%2384-12,+Chapinero,+Bogot%C3%A1&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="h-56 w-full sm:h-64"
+            ></iframe>
+          </div>
+          <p class="text-[#141414]/60">
             Cra 13 # 84-12, Chapinero, Bogotá.
             <br />
             A 1 cuadra de la estación. Ambiente tranquilo y café de bienvenida.
@@ -225,6 +312,33 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuen
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      var triggers = document.querySelectorAll('[data-faq-trigger]');
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          var card = trigger.closest('.card');
+          var panel = card ? card.querySelector('.faq-panel') : null;
+          var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+          triggers.forEach(function (t) {
+            t.setAttribute('aria-expanded', 'false');
+            var c = t.querySelector('.faq-chevron');
+            if (c) c.classList.remove('rotate-180');
+            var ca = t.closest('.card');
+            var p = ca ? ca.querySelector('.faq-panel') : null;
+            if (p) p.classList.remove('open');
+          });
+          if (!isOpen && panel) {
+            trigger.setAttribute('aria-expanded', 'true');
+            panel.classList.add('open');
+            var ch = trigger.querySelector('.faq-chevron');
+            if (ch) ch.classList.add('rotate-180');
+          }
+        });
+      });
+    })();
+  </script>
 </main>
 
 <DemoFooter
