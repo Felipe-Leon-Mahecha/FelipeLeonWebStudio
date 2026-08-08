@@ -3,6 +3,7 @@ import DemoStrip from './DemoStrip.astro';
 import DemoHeader from './DemoHeader.astro';
 import DemoHero from './DemoHero.astro';
 import DemoFooter from './DemoFooter.astro';
+import DemoPersonalizePanel from './DemoPersonalizePanel.astro';
 import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
@@ -11,6 +12,7 @@ const accent = '#2f9e44';
 const tier = "normal";
 const base = '#fbf7ec';
 const surface = '#fffdf6';
+const accentOptions = ['#198754', '#fd7e14', '#e03131', '#f59f00', '#7048e8'];
 
 const products = [
   { icon: 'lucide:shopping-basket', name: 'Mercado de la semana', price: '$45.000', desc: '10 productos: frutas, verduras, granos y proteína.', hot: true },
@@ -60,6 +62,8 @@ const wa = whatsappLink('Hola, quiero hacer un pedido del Mercado Rodante. ¿Cu�
   ctaText="Pedir hoy"
   ctaHref={wa}
   light
+  editableBrand
+  showLogoPlaceholder={true}
 />
 
 <main style={`background:${base}`}>
@@ -75,6 +79,7 @@ const wa = whatsappLink('Hola, quiero hacer un pedido del Mercado Rodante. ¿Cu�
     secondaryText="Ver catálogo"
     secondaryHref="#catalogo"
     meta={['Domicilios gratis', 'Precios justos', 'Pago al recibir']}
+    editableTitle
   />
 
   <section id="catalogo" class="py-24">
@@ -252,3 +257,5 @@ const wa = whatsappLink('Hola, quiero hacer un pedido del Mercado Rodante. ¿Cu�
   ctaText="Haz tu pedido hoy"
   message="Hola, quiero hacer un pedido del Mercado Rodante. ¿Cuál es la ruta de hoy?"
 />
+
+<DemoPersonalizePanel accentOptions={accentOptions} defaultAccent={accent} />

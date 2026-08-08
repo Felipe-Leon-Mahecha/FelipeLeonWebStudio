@@ -55,6 +55,8 @@ const wa = whatsappLink('Hola, quiero reservar un turno en Navaja Club. ¿Me cue
   ]}
   ctaText="Reservar por WhatsApp"
   ctaHref={wa}
+  editableBrand
+  showLogoPlaceholder={true}
 />
 
 <main style={`background:${base}`}>
@@ -71,6 +73,7 @@ const wa = whatsappLink('Hola, quiero reservar un turno en Navaja Club. ¿Me cue
     secondaryHref="#servicios"
     meta={['Solo con cita', 'Café incluido', 'Puntualidad garantizada']}
     dark
+    editableTitle
   />
 
   <section id="servicios" class="py-24">

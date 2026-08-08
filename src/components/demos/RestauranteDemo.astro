@@ -3,6 +3,7 @@ import DemoStrip from './DemoStrip.astro';
 import DemoHeader from './DemoHeader.astro';
 import DemoHero from './DemoHero.astro';
 import DemoFooter from './DemoFooter.astro';
+import DemoPersonalizePanel from './DemoPersonalizePanel.astro';
 import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
@@ -11,6 +12,7 @@ const accent = '#e8562f';
 const tier = "normal";
 const base = '#fff7ef';
 const surface = '#ffffff';
+const accentOptions = ['#c92a2a', '#f59f00', '#2b8a3e', '#862e9c', '#5f3dc4'];
 
 const dishes = [
   { icon: 'lucide:utensils', name: 'Bandeja paisa', price: '$32.000', desc: 'Fríjol, arroz, chicharrón, huevo, aguacate y arepa.' },
@@ -56,6 +58,8 @@ const wa = whatsappLink('Hola, quiero reservar una mesa en Sazón Criollo. ¿Me 
   ctaText="Reservar mesa"
   ctaHref={wa}
   light
+  editableBrand
+  showLogoPlaceholder={true}
 />
 
 <main style={`background:${base}`}>
@@ -71,6 +75,7 @@ const wa = whatsappLink('Hola, quiero reservar una mesa en Sazón Criollo. ¿Me 
     secondaryText="Ver menú"
     secondaryHref="#menu"
     meta={['Menú con precios', 'Reservas por WhatsApp', 'Domicilios']}
+    editableTitle
   />
 
   <section id="menu" class="py-24">
@@ -214,3 +219,5 @@ const wa = whatsappLink('Hola, quiero reservar una mesa en Sazón Criollo. ¿Me 
   ctaText="Reserva tu mesa hoy"
   message="Hola, quiero reservar una mesa en Sazón Criollo. ¿Me cuentan disponibilidad?"
 />
+
+<DemoPersonalizePanel accentOptions={accentOptions} defaultAccent={accent} />
