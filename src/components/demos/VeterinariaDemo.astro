@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#2a9d8f';
+const tier = "premium";
 const base = '#f1f8f9';
 const surface = '#ffffff';
 const emergency = '#e63946';
@@ -37,7 +38,7 @@ const wa = whatsappLink('Hola, quiero agendar una consulta en Patitas y Más par
 const waUrgencia = whatsappLink('Hola, tengo una urgencia con mi mascota. ¿Están disponibles?');
 ---
 
-<DemoStrip slug="veterinaria" brand="Patitas y Más" />
+<DemoStrip slug="veterinaria" brand="Patitas y Más" tier={tier} />
 <DemoHeader
   brand="Patitas y Más"
   accent={accent}

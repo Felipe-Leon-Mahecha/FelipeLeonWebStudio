@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#2f9e44';
+const tier = "normal";
 const base = '#fbf7ec';
 const surface = '#fffdf6';
 
@@ -46,7 +47,7 @@ const testimonials = [
 const wa = whatsappLink('Hola, quiero hacer un pedido del Mercado Rodante. ¿Cuál es la ruta de hoy?');
 ---
 
-<DemoStrip slug="mercados" brand="Mercado Rodante" />
+<DemoStrip slug="mercados" brand="Mercado Rodante" tier={tier} />
 <DemoHeader
   brand="Mercado Rodante"
   accent={accent}

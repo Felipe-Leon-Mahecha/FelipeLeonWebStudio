@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#b2376a';
+const tier = "premium";
 const base = '#fdf5f3';
 const surface = '#ffffff';
 
@@ -42,7 +43,7 @@ const hours = [
 const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuentan disponibilidad?');
 ---
 
-<DemoStrip slug="unas" brand="Luna Nails" />
+<DemoStrip slug="unas" brand="Luna Nails" tier={tier} />
 <DemoHeader
   brand="Luna Nails"
   accent={accent}

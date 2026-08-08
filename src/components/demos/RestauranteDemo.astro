@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#e8562f';
+const tier = "normal";
 const base = '#fff7ef';
 const surface = '#ffffff';
 
@@ -42,7 +43,7 @@ const hours = [
 const wa = whatsappLink('Hola, quiero reservar una mesa en Sazón Criollo. ¿Me cuentan disponibilidad?');
 ---
 
-<DemoStrip slug="restaurante" brand="Sazón Criollo" />
+<DemoStrip slug="restaurante" brand="Sazón Criollo" tier={tier} />
 <DemoHeader
   brand="Sazón Criollo"
   accent={accent}

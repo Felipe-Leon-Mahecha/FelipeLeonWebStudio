@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#d4a24e';
+const tier = "basico";
 const base = '#0e0e11';
 const surface = '#16161b';
 
@@ -42,7 +43,7 @@ const hours = [
 const wa = whatsappLink('Hola, quiero reservar un turno en Navaja Club. ¿Me cuentan disponibilidad?');
 ---
 
-<DemoStrip slug="barberia" brand="Navaja Club" />
+<DemoStrip slug="barberia" brand="Navaja Club" tier={tier} />
 <DemoHeader
   brand="Navaja Club"
   accent={accent}

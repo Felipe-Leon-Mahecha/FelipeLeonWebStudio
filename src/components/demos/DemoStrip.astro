@@ -5,10 +5,20 @@ import { whatsappLink } from '../../lib/site';
 interface Props {
   slug: string;
   brand: string;
+  tier: "basico" | "normal" | "premium";
 }
 
-const { slug, brand } = Astro.props;
+const { slug, brand, tier } = Astro.props;
 const wa = whatsappLink(`Hola Felipe, vi la demo de ${brand} y quiero una página así para mi negocio.`);
+
+const tierLabel =
+  tier === "basico" ? "Básico" : tier === "normal" ? "Normal" : "Premium";
+const tierStyles =
+  tier === "basico"
+    ? "bg-white/15 text-white/70 border border-white/10"
+    : tier === "normal"
+    ? "bg-[#6d5bff] text-white"
+    : "bg-[#25d366] text-[#0a0a0a]";
 ---
 
 <div class="fixed inset-x-0 top-0 z-50 h-11 border-b border-white/10 bg-[#0a0a0a]">
@@ -20,6 +30,9 @@ const wa = whatsappLink(`Hola Felipe, vi la demo de ${brand} y quiero una págin
         <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
       </span>
       <span class="hidden sm:inline">{slug}.demo</span>
+      <span class={`ml-1 inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-[10px] font-medium tracking-[0.2em] uppercase ${tierStyles}`}>
+        {tierLabel}
+      </span>
     </span>
 
     <a

@@ -8,6 +8,7 @@ import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
 
 const accent = '#d24a7d';
+const tier = "normal";
 const base = '#fdf4f7';
 const surface = '#ffffff';
 
@@ -54,7 +55,7 @@ const hours = [
 const wa = whatsappLink('Hola, quiero agendar una cita en Glow Studio. ¿Me cuentan disponibilidad?');
 ---
 
-<DemoStrip slug="boutique" brand="Glow Studio" />
+<DemoStrip slug="boutique" brand="Glow Studio" tier={tier} />
 <DemoHeader
   brand="Glow Studio"
   accent={accent}
