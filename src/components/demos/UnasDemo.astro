@@ -4,6 +4,7 @@ import DemoHeader from './DemoHeader.astro';
 import DemoHero from './DemoHero.astro';
 import DemoFooter from './DemoFooter.astro';
 import DemoPersonalizePanel from './DemoPersonalizePanel.astro';
+import DemoAdminPanelMock from './DemoAdminPanelMock.astro';
 import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
@@ -243,6 +244,16 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuent
       </div>
     </div>
   </section>
+
+  <DemoAdminPanelMock
+    brand="Luna Nails"
+    accent={accent}
+    metrics={[
+      { icon: 'lucide:calendar-check', value: '8', label: 'Citas de hoy' },
+      { icon: 'lucide:package', value: '24', label: 'Productos activos' },
+      { icon: 'lucide:star', value: '3', label: 'Reseñas nuevas' },
+    ]}
+  />
 </main>
 
 <DemoFooter

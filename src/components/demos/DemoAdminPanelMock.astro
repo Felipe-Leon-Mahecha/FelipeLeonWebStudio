@@ -1,0 +1,104 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Metric {
+  icon: string;
+  value: string;
+  label: string;
+}
+
+interface Props {
+  brand: string;
+  accent: string;
+  metrics: Metric[];
+  dark?: boolean;
+}
+
+const { brand, accent, metrics, dark = false } = Astro.props;
+const text = dark ? 'text-white' : 'text-[#141414]';
+const textSoft = dark ? 'text-white/60' : 'text-[#141414]/60';
+const surface = dark ? 'bg-[#16161b]' : 'bg-white';
+const border = dark ? 'border-white/10' : 'border-[#141414]/10';
+---
+
+<section id="panel-admin" class="py-24">
+  <div class="shell">
+    <div class="max-w-2xl">
+      <span class="font-mono text-xs font-medium tracking-[0.25em] uppercase" style={`color:${accent}`}>
+        Tu panel de control
+      </span>
+      <h2 class={`display mt-3 text-3xl sm:text-5xl ${text}`}>Gestiona {brand} sin tocar código</h2>
+      <p class={`mt-5 text-lg leading-relaxed ${textSoft}`}>
+        Edita precios, productos y citas desde un panel pensado para ti. Todo en vivo, sin programadores ni demoras.
+      </p>
+    </div>
+
+    <div class={`card mt-12 p-6 sm:p-10 ${surface} ${border}`} style="box-shadow:var(--shadow-card)">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl"
+            style={`background:color-mix(in srgb,${accent} 12%,transparent); color:${accent}`}
+          >
+            <Icon name="lucide:layout-dashboard" width={20} height={20} class="h-5 w-5" />
+          </div>
+          <div>
+            <p class={`font-display text-lg font-bold ${text}`}>Vista de hoy</p>
+            <p class={`text-xs ${textSoft}`}>Resumen en tiempo real</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-[0.15em] uppercase" style={`background:color-mix(in srgb,${accent} 10%,transparent); color:${accent}`}>
+          <span class="h-1.5 w-1.5 rounded-full animate-pulse-soft" style={`background:${accent}`}></span>
+          En vivo
+        </span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3">
+        {metrics.map((m) => (
+          <div
+            class={`demo-admin-metric group rounded-xl border p-5 transition-all duration-300 ${surface} ${border}`}
+          >
+            <div
+              class="demo-admin-metric-icon flex h-11 w-11 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110"
+              style={`background:color-mix(in srgb,${accent} 12%,transparent); color:${accent}`}
+            >
+              <Icon name={m.icon} width={22} height={22} class="h-[22px] w-[22px]" />
+            </div>
+            <p class={`mt-5 font-display text-3xl font-bold ${text}`}>{m.value}</p>
+            <p class={`mt-1 text-sm ${textSoft}`}>{m.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center justify-between gap-3 border-t pt-6" style={`border-color:${dark ? 'rgba(255,255,255,0.08)' : 'rgba(20,20,20,0.08)'}`}>
+        <span
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold"
+          style={`border-color:color-mix(in srgb,${accent} 25%,transparent); color:${accent}; background:color-mix(in srgb,${accent} 8%,transparent)`}
+        >
+          <Icon name="lucide:credit-card" width={16} height={16} class="h-4 w-4" />
+          Pasarela de pago integrable
+        </span>
+        <p class={`font-mono text-[11px] tracking-[0.15em] uppercase ${textSoft}`}>
+          Plan Premium incluido
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-admin-metric:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -12px rgba(10, 10, 10, 0.18);
+    border-color: color-mix(in srgb, var(--demo-accent, var(--demo-accent-default, #6d5bff)) 30%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-admin-metric,
+    .demo-admin-metric:hover,
+    .demo-admin-metric-icon,
+    .demo-admin-metric-icon:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

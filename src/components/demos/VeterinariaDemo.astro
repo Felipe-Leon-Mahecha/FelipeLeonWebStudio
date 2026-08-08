@@ -4,6 +4,7 @@ import DemoHeader from './DemoHeader.astro';
 import DemoHero from './DemoHero.astro';
 import DemoFooter from './DemoFooter.astro';
 import DemoPersonalizePanel from './DemoPersonalizePanel.astro';
+import DemoAdminPanelMock from './DemoAdminPanelMock.astro';
 import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
@@ -199,6 +200,16 @@ const waUrgencia = whatsappLink('Hola, tengo una urgencia con mi mascota. ¿Est�
       </div>
     </div>
   </section>
+
+  <DemoAdminPanelMock
+    brand="Patitas y Más"
+    accent={accent}
+    metrics={[
+      { icon: 'lucide:calendar-check', value: '12', label: 'Citas de hoy' },
+      { icon: 'lucide:heart-pulse', value: '340', label: 'Mascotas registradas' },
+      { icon: 'lucide:syringe', value: '5', label: 'Vacunas pendientes' },
+    ]}
+  />
 </main>
 
 <DemoFooter
