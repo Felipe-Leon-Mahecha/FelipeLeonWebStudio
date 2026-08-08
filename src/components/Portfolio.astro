@@ -6,6 +6,15 @@ import WhatsAppIcon from './ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../lib/site';
 
 const demos = (await getCollection('demos')).sort((a, b) => a.data.order - b.data.order);
+
+const tierMap: Record<string, 'basico' | 'normal' | 'premium'> = {
+  barberia: 'basico',
+  boutique: 'normal',
+  mercados: 'normal',
+  restaurante: 'normal',
+  unas: 'premium',
+  veterinaria: 'premium',
+};
 ---
 
 <section id="portafolio" class="py-24">
@@ -46,6 +55,11 @@ const demos = (await getCollection('demos')).sort((a, b) => a.data.order - b.dat
               >
                 <div class="bg-grid absolute inset-0 opacity-30" aria-hidden="true"></div>
                 <div class="absolute inset-0 bg-ink/20" aria-hidden="true"></div>
+                <span
+                  class={`demo-tier-badge absolute top-3 right-3 z-10 rounded-full px-3 py-1 font-mono text-[10px] font-semibold tracking-[0.18em] uppercase demo-tier-${tierMap[demo.data.slug] || 'normal'}`}
+                >
+                  {tierMap[demo.data.slug] === 'basico' ? 'Básica' : tierMap[demo.data.slug] === 'premium' ? 'Premium' : 'Normal'}
+                </span>
                 <span class="display relative px-6 text-center text-3xl text-white drop-shadow-lg">
                   {demo.data.title}
                 </span>
@@ -100,3 +114,67 @@ const demos = (await getCollection('demos')).sort((a, b) => a.data.order - b.dat
     </div>
   </div>
 </section>
+<style>
+  .demo-tier-badge {
+    line-height: 1;
+  }
+  .demo-tier-basico {
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    box-shadow: 0 4px 14px -4px rgba(37, 99, 235, 0.55);
+  }
+  .demo-tier-normal {
+    background: linear-gradient(135deg, #b8860b, #f5d76e);
+    color: #1a1200;
+    box-shadow: 0 4px 14px -4px rgba(184, 134, 11, 0.45);
+  }
+  .demo-tier-premium {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  .demo-tier-premium::before {
+    content: "";
+    position: absolute;
+    inset: -200%;
+    z-index: -1;
+    background: conic-gradient(
+      from 0deg,
+      #8b7dff 0deg,
+      #5bc8ff 72deg,
+      #66e6b9 144deg,
+      #ffd277 216deg,
+      #ff9fd8 288deg,
+      #8b7dff 360deg
+    );
+    animation: prisma-rotate 7s linear infinite;
+  }
+  .demo-tier-premium::after {
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    z-index: -1;
+    border-radius: 9999px;
+    background: linear-gradient(
+      135deg,
+      rgba(139, 125, 255, 0.92),
+      rgba(91, 200, 255, 0.92),
+      rgba(102, 230, 185, 0.92),
+      rgba(255, 210, 119, 0.92)
+    );
+  }
+  @keyframes prisma-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-tier-premium::before {
+      animation: none;
+      transform: rotate(45deg);
+    }
+  }
+</style>
