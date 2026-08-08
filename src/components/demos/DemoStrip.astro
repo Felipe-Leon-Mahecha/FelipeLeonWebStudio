@@ -12,7 +12,7 @@ const { slug, brand, tier } = Astro.props;
 const wa = whatsappLink(`Hola Felipe, vi la demo de ${brand} y quiero una página así para mi negocio.`);
 
 const tierLabel =
-  tier === "basico" ? "Básico" : tier === "normal" ? "Normal" : "Premium";
+  tier === "basico" ? "Versión Básica" : tier === "normal" ? "Versión Normal" : "Versión Premium";
 const tierStyles =
   tier === "basico"
     ? "bg-white/15 text-white/70 border border-white/10"

@@ -3,6 +3,7 @@ import DemoStrip from './DemoStrip.astro';
 import DemoHeader from './DemoHeader.astro';
 import DemoHero from './DemoHero.astro';
 import DemoFooter from './DemoFooter.astro';
+import DemoPersonalizePanel from './DemoPersonalizePanel.astro';
 import WhatsAppIcon from '../ui/WhatsAppIcon.astro';
 import { whatsappLink } from '../../lib/site';
 import { Icon } from 'astro-icon/components';
@@ -11,6 +12,7 @@ const accent = '#b2376a';
 const tier = "premium";
 const base = '#fdf5f3';
 const surface = '#ffffff';
+const accentOptions = ['#8b5cf6', '#ec4899', '#0ea5e9', '#f59e0b', '#0f766e'];
 
 const services = [
   { icon: 'lucide:hand', name: 'Manicure básico', price: '$25.000', desc: 'Limpieza, cutícula y esmaltado tradicional.' },
@@ -56,6 +58,7 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuent
   ctaText="Agendar cita"
   ctaHref={wa}
   light
+  editableBrand
 />
 
 <main style={`background:${base}`}>
@@ -71,6 +74,7 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuent
     secondaryText="Ver servicios"
     secondaryHref="#servicios"
     meta={['Productos profesionales', 'Agenda fácil', 'Precios claros']}
+    editableTitle
   />
 
   <section id="servicios" class="py-24">
@@ -246,3 +250,5 @@ const wa = whatsappLink('Hola, quiero agendar una cita en Luna Nails. ¿Me cuent
   ctaText="Agenda tu cita hoy"
   message="Hola, quiero agendar una cita en Luna Nails. ¿Me cuentan disponibilidad?"
 />
+
+<DemoPersonalizePanel accentOptions={accentOptions} defaultAccent={accent} />

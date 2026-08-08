@@ -1,0 +1,99 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  accentOptions: string[];
+  defaultAccent: string;
+}
+
+const { accentOptions, defaultAccent } = Astro.props;
+const options = [defaultAccent, ...accentOptions];
+---
+
+<div class="demo-personalize fixed right-5 bottom-5 z-40 sm:right-6 sm:bottom-6" id="demoPersonalize">
+  <div class="demo-personalize-panel mb-3 hidden w-56 rounded-2xl border border-white/10 bg-[#0a0a0a]/95 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur">
+    <p class="font-mono text-[10px] font-medium tracking-[0.2em] uppercase text-white/50">
+      Color de acento
+    </p>
+    <div class="mt-3 grid grid-cols-5 gap-2">
+      {options.map((c, i) => (
+        <button
+          type="button"
+          class={`demo-personalize-swatch h-8 w-8 rounded-full border-2 transition-transform hover:scale-110 ${
+            i === 0 ? 'border-white/60' : 'border-white/10'
+          }`}
+          data-swatch={c}
+          aria-label={`Color ${c}`}
+          style={`background:${c}`}
+        />
+      ))}
+    </div>
+    <button
+      type="button"
+      id="demoPersonalizeReset"
+      class="mt-4 w-full rounded-full border border-white/10 px-3 py-2 text-xs font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+    >
+      Restaurar original
+    </button>
+  </div>
+  <button
+    type="button"
+    id="demoPersonalizeToggle"
+    aria-label="Personalizar demo"
+    class="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0a0a0a] shadow-[0_8px_30px_rgba(0,0,0,0.25)] transition-transform duration-300 hover:scale-110"
+  >
+    <Icon name="lucide:palette" width={24} height={24} class="h-6 w-6" />
+  </button>
+</div>
+
+<script is:inline>
+  (function () {
+    const root = document.documentElement;
+    const wrap = document.getElementById('demoPersonalize');
+    const toggle = document.getElementById('demoPersonalizeToggle');
+    const panel = wrap.querySelector('.demo-personalize-panel');
+    const reset = document.getElementById('demoPersonalizeReset');
+    const swatches = wrap.querySelectorAll('.demo-personalize-swatch');
+    const STORAGE_KEY = 'demo-accent';
+
+    function setAccent(color) {
+      if (!color) {
+        root.style.removeProperty('--demo-accent');
+      } else {
+        root.style.setProperty('--demo-accent', color);
+      }
+      swatches.forEach((b) => {
+        const active = b.dataset.swatch === (color || swatches[0].dataset.swatch);
+        b.style.borderColor = active ? '#fff' : 'rgba(255,255,255,0.1)';
+      });
+    }
+
+    toggle.addEventListener('click', () => {
+      panel.classList.toggle('hidden');
+    });
+
+    swatches.forEach((b) => {
+      b.addEventListener('click', () => {
+        const color = b.dataset.swatch;
+        setAccent(color === swatches[0].dataset.swatch ? null : color);
+        try {
+          if (color === swatches[0].dataset.swatch) {
+            localStorage.removeItem(STORAGE_KEY);
+          } else {
+            localStorage.setItem(STORAGE_KEY, color);
+          }
+        } catch (_) {}
+      });
+    });
+
+    reset.addEventListener('click', () => {
+      setAccent(null);
+      try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    });
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) setAccent(saved);
+    } catch (_) {}
+  })();
+</script>

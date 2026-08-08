@@ -1,5 +1,6 @@
 ---
 import Gem from '../ui/Gem.astro';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   brand: string;
@@ -8,28 +9,43 @@ interface Props {
   ctaText: string;
   ctaHref: string;
   light?: boolean;
+  editableBrand?: boolean;
 }
 
-const { brand, accent, links, ctaText, ctaHref, light = false } = Astro.props;
+const { brand, accent, links, ctaText, ctaHref, light = false, editableBrand = false } = Astro.props;
 const text = light ? 'text-[#141414]' : 'text-white';
 const textSoft = light ? 'text-[#141414]/60' : 'text-white/60';
 const bg = light ? 'bg-white/70' : 'bg-[#0a0a0a]/70';
 const border = light ? 'border-[#141414]/10' : 'border-white/10';
 ---
 
-<header class={`sticky top-11 z-40 border-b backdrop-blur ${bg} ${border}`}>
+<header
+  class={`sticky top-11 z-40 border-b backdrop-blur ${bg} ${border}`}
+  style={`--demo-accent-default: ${accent}`}
+>
   <div class="shell flex h-16 items-center justify-between gap-4">
-    <a href="#inicio" class={`flex items-center gap-2.5 font-display text-lg font-bold ${text}`}>
-      <Gem width={22} height={22} class="h-5 w-5" />
-      {brand}
-    </a>
+    {editableBrand ? (
+      <div class={`group relative flex items-center gap-2.5 font-display text-lg font-bold ${text} [&_[contenteditable]:focus]:outline-none`}>
+        <Gem width={22} height={22} class="h-5 w-5" />
+        <span class="demo-header-brand" contenteditable="true" spellcheck="false">{brand}</span>
+        <Icon
+          name="lucide:pencil"
+          width={14}
+          height={14}
+          class="pointer-events-none h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-60"
+          style="color: var(--demo-accent, var(--demo-accent-default))"
+        />
+      </div>
+    ) : (
+      <a href="#inicio" class={`flex items-center gap-2.5 font-display text-lg font-bold ${text}`}>
+        <Gem width={22} height={22} class="h-5 w-5" />
+        <span class="demo-header-brand">{brand}</span>
+      </a>
+    )}
 
-    <nav class="hidden items-center gap-7 md:flex" style={`--accent:${accent}`}>
+    <nav class="demo-header-nav hidden items-center gap-7 md:flex">
       {links.map((l) => (
-        <a
-          href={l.href}
-          class={`text-sm font-medium transition-colors ${textSoft} hover:text-[var(--accent)]`}
-        >
+        <a href={l.href} class={`text-sm font-medium transition-colors ${textSoft}`}>
           {l.label}
         </a>
       ))}
@@ -38,9 +54,14 @@ const border = light ? 'border-[#141414]/10' : 'border-white/10';
     <a
       href={ctaHref}
       class="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5"
-      style={`background:${accent}`}
+      style="background: var(--demo-accent, var(--demo-accent-default))"
     >
       {ctaText}
     </a>
   </div>
 </header>
+<style>
+  .demo-header-nav a:hover {
+    color: var(--demo-accent, var(--demo-accent-default));
+  }
+</style>
