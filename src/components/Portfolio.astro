@@ -56,7 +56,7 @@ const tierMap: Record<string, 'basico' | 'normal' | 'premium'> = {
                 <div class="bg-grid absolute inset-0 opacity-30" aria-hidden="true"></div>
                 <div class="absolute inset-0 bg-ink/20" aria-hidden="true"></div>
                 <span
-                  class={`demo-tier-badge absolute top-3 right-3 z-10 rounded-full px-3 py-1 font-mono text-[10px] font-semibold tracking-[0.18em] uppercase demo-tier-${tierMap[demo.data.slug] || 'normal'}`}
+                  class={`demo-tier-badge absolute top-3 right-3 z-10 rounded-full px-3.5 py-1.5 font-mono text-xs font-semibold tracking-[0.16em] uppercase demo-tier-${tierMap[demo.data.slug] || 'normal'}`}
                 >
                   {tierMap[demo.data.slug] === 'basico' ? 'Básica' : tierMap[demo.data.slug] === 'premium' ? 'Premium' : 'Normal'}
                 </span>
@@ -129,7 +129,7 @@ const tierMap: Record<string, 'basico' | 'normal' | 'premium'> = {
     box-shadow: 0 4px 14px -4px rgba(184, 134, 11, 0.45);
   }
   .demo-tier-premium {
-    position: relative;
+    position: absolute;
     isolation: isolate;
     overflow: hidden;
     color: #ffffff;
